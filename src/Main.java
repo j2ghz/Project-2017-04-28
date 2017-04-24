@@ -19,7 +19,7 @@ public class Main {
 
         UserManager userManager = new UserManager(db);
 
-        LoginUI loginUI = new LoginUI(userManager);
+        LoginUI loginUI = new LoginUI(userManager, db);
         loginUI.setVisible(true);
 
 

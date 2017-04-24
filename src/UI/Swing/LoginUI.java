@@ -2,11 +2,15 @@ package UI.Swing;
 
 
 import Domain.Management.UserManager;
+import Services.Database.DB;
 
 import javax.swing.*;
 
 public class LoginUI extends JFrame {
-    public LoginUI(UserManager userManager) {
+    private DB db;
+
+    public LoginUI(UserManager userManager, DB db) {
+        this.db = db;
         this.setSize(100, 80);
         JButton b = new JButton();
         this.add(b);
@@ -15,7 +19,7 @@ public class LoginUI extends JFrame {
 
     private void next() {
         this.setVisible(false);
-        MainFrame f = new MainFrame();
+        MainFrame f = new MainFrame(db);
     }
 
 }

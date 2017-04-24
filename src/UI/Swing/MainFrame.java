@@ -1,12 +1,14 @@
 package UI.Swing;
 
+import Services.Database.DB;
+
 import javax.swing.*;
 
-/**
- * Created by j200g on 20.04.2017.
- */
 public class MainFrame extends JFrame {
-    public MainFrame() {
+    private DB db;
+
+    public MainFrame(DB db) {
+        this.db = db;
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(500, 500);
