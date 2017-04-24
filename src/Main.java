@@ -15,6 +15,7 @@ public class Main {
             return;
         }
         System.out.println("Connected");
+
         MainFrame f = new MainFrame();
     }
 }

@@ -18,8 +18,10 @@ public class DB {
         }
 
     }
-
-    public ArrayList<Arrangement> getArrangements() throws SQLException {
+    public ArrayList<Arrangement> getArrangements(){
+        throw new NotImplementedException();
+    }
+    public Arrangement getArrangement(/*identifier*/){
         throw new NotImplementedException();
     }
     public void addArrangement(Arrangement arrangement){
@@ -35,6 +37,9 @@ public class DB {
     public ArrayList<Catering> getCaterings(){
         throw new NotImplementedException();
     }
+    public Catering getCatering(/*identifier*/){
+        throw new NotImplementedException();
+    }
     public void addCatering(Catering catering){
         throw new NotImplementedException();
     }
@@ -46,6 +51,9 @@ public class DB {
     }
 
     public ArrayList<Customer> getCustomers(){
+        throw new NotImplementedException();
+    }
+    public Customer getCustomer(/*identifier*/){
         throw new NotImplementedException();
     }
     public void addCustomer(Customer customer){
@@ -61,6 +69,9 @@ public class DB {
     public ArrayList<Employee> getEmployees(){
         throw new NotImplementedException();
     }
+    public Employee getEmployee(/*identifier*/){
+        throw new NotImplementedException();
+    }
     public void addEmployee(Employee employee){
         throw new NotImplementedException();
     }
@@ -72,6 +83,9 @@ public class DB {
     }
 
     public ArrayList<Menu> getMenus(){
+        throw new NotImplementedException();
+    }
+    public Menu getMenu(/*identifier*/){
         throw new NotImplementedException();
     }
     public void addMenu(Menu menu){
@@ -87,6 +101,9 @@ public class DB {
     public ArrayList<Room> getRooms(){
         throw new NotImplementedException();
     }
+    public Room getRoom(/*identifier*/){
+        throw new NotImplementedException();
+    }
     public void addRoom(Room room){
         throw new NotImplementedException();
     }
@@ -98,6 +115,9 @@ public class DB {
     }
 
     public ArrayList<RoomReservation> getRoomReservations(){
+        throw new NotImplementedException();
+    }
+    public RoomReservation getRoomReservation(/*identifier*/){
         throw new NotImplementedException();
     }
     public void addRoomReservation(RoomReservation roomReservation){
@@ -113,6 +133,9 @@ public class DB {
     public ArrayList<RoomService> getRoomServices(){
         throw new NotImplementedException();
     }
+    public RoomService getRoomService(/*identifier*/){
+        throw new NotImplementedException();
+    }
     public void addRoomService(RoomService roomService){
         throw new NotImplementedException();
     }
@@ -124,6 +147,9 @@ public class DB {
     }
 
     public ArrayList<ToDo> getToDos(){
+        throw new NotImplementedException();
+    }
+    public ToDo getToDo(/*identifier*/){
         throw new NotImplementedException();
     }
     public void addToDo(ToDo toDo){
@@ -139,6 +165,9 @@ public class DB {
     public ArrayList<User> getUsers(){
         throw new NotImplementedException();
     }
+    public User getUser(/*identifier*/){
+        throw new NotImplementedException();
+    }
     public void addUser(User user){
         throw new NotImplementedException();
     }
@@ -148,6 +177,7 @@ public class DB {
     public void updateUser(User user){
         throw new NotImplementedException();
     }
+
 
 
 }
