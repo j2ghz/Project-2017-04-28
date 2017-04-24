@@ -6,11 +6,11 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.Date;
 
 public class ReservationManager {
-    public boolean freeRooms(Date date){
+    public boolean freeRooms(Date date) {
         throw new NotImplementedException();
     }
 
-    public void reserveRoom(){
+    public void reserveRoom() {
         throw new NotImplementedException();
     }
 

@@ -1,17 +1,24 @@
 package Domain.Management;
 
+import Domain.Model.User;
 import Services.Database.DB;
 
-/**
- * Created by j200g on 24.04.2017.
- */
+
 public class UserManager {
     private DB db;
-    public UserManager(DB db){
-        this.db=db;
+    public User currentUser = null;
+
+    public UserManager(DB db) {
+        this.db = db;
     }
 
-    public boolean login(String user, String pass){
-        db.getUsers(/**/);
+    public boolean login(String user, String pass) {
+        currentUser=db.getUser(user,pass);
+        return currentUser != null;
     }
+
+    public void logout(){
+        currentUser=null;
+    }
+
 }
