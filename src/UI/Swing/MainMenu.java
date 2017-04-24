@@ -1,3 +1,7 @@
+package UI.Swing;
+
+import Services.Database.DB;
+
 import javax.swing.*;
 
 /**

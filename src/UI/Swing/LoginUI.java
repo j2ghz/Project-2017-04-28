@@ -1,3 +1,8 @@
+package UI.Swing;
+
+import Domain.Management.UserManager;
+import Services.Database.DB;
+
 import javax.swing.*;
 
 /**
