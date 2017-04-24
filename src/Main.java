@@ -1,7 +1,6 @@
 import Domain.Management.UserManager;
 import Services.Database.DB;
 import UI.Swing.LoginUI;
-import UI.Swing.MainFrame;
 
 public class Main {
 
@@ -20,10 +19,10 @@ public class Main {
 
         UserManager userManager = new UserManager(db);
 
-        MainFrame f = new MainFrame();
-
-        LoginUI loginUI = new LoginUI(f);
+        LoginUI loginUI = new LoginUI(userManager);
         loginUI.setVisible(true);
+
+
         //if login bad exit
 
     }
