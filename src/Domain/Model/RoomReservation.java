@@ -23,6 +23,21 @@ public class RoomReservation {
         return roomServices;
     }
 
+    public RoomReservation(Date checkIn, Date chekcOut, Customer customer, Room room) {
+        this.checkIn = checkIn;
+        this.chekcOut = chekcOut;
+        this.customer = customer;
+        this.room = room;
+    }
+
+    public void addMenu(Menu menu) {
+        menus.add(menu);
+    }
+
+    public void addRoomService(RoomService rs) {
+        roomServices.add(rs);
+    }
+
     public void setRoomServices(Collection<RoomService> roomServices) {
         this.roomServices = roomServices;
     }
