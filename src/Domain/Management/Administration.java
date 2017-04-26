@@ -20,15 +20,7 @@ public class Administration {
     public Employee getEmployee(/*identifier*/){
         throw new NotImplementedException();
     }
-    public void createEmployee(/*props*/String name, String email, String address, String acc, String phone, String pos){
-        Employee employee = new Employee();
-        employee.setName(name);
-        employee.setEmail(email);
-        employee.setAddress(address);
-        employee.setBankAccount(acc);
-        employee.setPhoneNumber(phone);
-        employee.setPosition(pos);
-
+    public void createEmployee(Employee employee){
         db.addEmployee(employee);
     }
     public void deleteEmployee(Employee emoloyee){
