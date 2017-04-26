@@ -6,6 +6,13 @@ public class Room {
     private int number;
     private int bedCount;
 
+    public Room(double price, String name, int number, int bedCount) {
+        this.price = price;
+        this.name = name;
+        this.number = number;
+        this.bedCount = bedCount;
+    }
+
     public double getPrice() {
         return price;
     }

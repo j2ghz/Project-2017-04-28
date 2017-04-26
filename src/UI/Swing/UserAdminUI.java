@@ -1,5 +1,9 @@
 package UI.Swing;
 
+import Domain.Model.User;
+import Services.Database.DB;
+import com.sun.xml.internal.bind.v2.TODO;
+
 import javax.swing.*;
 
 /**
@@ -31,4 +35,77 @@ public class UserAdminUI {
     private JLabel lbPasswordNew;
     private JLabel lbGroupNew;
     private JLabel lbHelp;
+    private JTextField tfPasswordDelete;
+    private JLabel lbPasswordDelete;
+    private JTextField tfPasswordCurrent;
+    private JLabel lbPasswordCurrent;
+
+    public static void main(DB db) {
+        JFrame frame = new JFrame("UserAdminUI");
+        frame.setContentPane(new UserAdminUI(db).pnHolding);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public UserAdminUI(DB db) {
+        btCreateUser.addActionListener(Action -> createUser(db));
+        btDeleteUser.addActionListener(Action -> deleteUser(db));
+        btUpdateUser.addActionListener(Action -> editUser(db));
+    }
+
+    private void createUser(DB db) {
+        String username = tfUsernameCreate.getText();
+        String password = tfPasswordCreate.getText();
+        String group = tfGroupCreate.getText();
+
+        //TODO user does not have an employee object
+
+        if (username != null && password != null && group != null) {
+            User user = new User(username, password, group);
+            db.addUser(user);
+        } else {
+            JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, user not created.");
+        }
+    }
+
+    private void deleteUser(DB db) {
+        String username = tfUsernameDelete.getText();
+        String password = tfPasswordDelete.getText();
+
+        if (username != null && password != null) {
+            db.deleteUser(db.getUser(username, password));
+        } else {
+            JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, user not deleted.");
+        }
+    }
+
+    private void editUser(DB db) {
+        String username = tfUsernameCurrent.getText();
+        String password = tfPasswordCurrent.getText();
+
+        User user = null;
+
+        if (username != null && password != null) {
+            user = db.getUser(username, password);
+        } else {
+            JOptionPane.showConfirmDialog(pnHolding, "There was some current user information missing, user not found.");
+        }
+
+        String confirmation = null;
+        if (tfUsernameNew.getText() != null) {
+            user.setLogin(tfUsernameNew.getText());
+            confirmation += "Username edited. ";
+        }
+        if (tfPasswordNew.getText() != null) {
+            user.setPassword(tfPasswordNew.getText());
+            confirmation += "Password edited. ";
+        }
+        if (tfGroupNew.getText() != null) {
+            user.setGroup(tfGroupNew.getText());
+            confirmation += "Group edited.";
+        }
+
+        JOptionPane.showConfirmDialog(pnHolding, confirmation);
+    }
 }

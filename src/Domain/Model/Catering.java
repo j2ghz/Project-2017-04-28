@@ -12,6 +12,16 @@ public class Catering {
     private double price;
     private Customer customer;
 
+    public Catering(int numberOfMeals, String foodType, String location, Date date, int id, double price, Customer customer) {
+        this.numberOfMeals = numberOfMeals;
+        this.foodType = foodType;
+        this.location = location;
+        this.date = date;
+        this.id = id;
+        this.price = price;
+        this.customer = customer;
+    }
+
     public Customer getCustomer() {
         return customer;
     }

@@ -15,7 +15,19 @@ public class MainMenu {
     private JButton btArrangementReservation;
     private JButton btCreateToDo;
 
-    public MainMenu(DB db){
+    public static void main(DB db) {
+        JFrame frame = new JFrame("MainMenu");
+        frame.setContentPane(new MainMenu(db).pnHolding);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
+    public MainMenu(DB db){
+        btRoomReservation.addActionListener(Action -> new StandardReservationUI(db));
+        btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI(db));
+        btCateringReservation.addActionListener(Action -> new CateringReservationUI(db));
+        btCreateToDo.addActionListener(Action -> new ToDoUI(db));
+        btUserAdmin.addActionListener(Action -> new UserAdminUI(db));
     }
 }

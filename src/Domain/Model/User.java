@@ -11,6 +11,12 @@ public class User {
         return employee;
     }
 
+    public User(String group, String login, String password) {
+        this.group = group;
+        this.login = login;
+        this.password = password;
+    }
+
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }

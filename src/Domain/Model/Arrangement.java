@@ -7,9 +7,21 @@ public class Arrangement {
     private int id;
     private double price;
     private int customerId;
+    private int participantNo;
     private String name;
     private String description;
     private Customer customer;
+
+    public Arrangement(Date date, int id, double price, int customerId, String name, String description, Customer customer, int participantNo) {
+        this.date = date;
+        this.id = id;
+        this.price = price;
+        this.customerId = customerId;
+        this.participantNo = participantNo;
+        this.name = name;
+        this.description = description;
+        this.customer = customer;
+    }
 
     public Customer getCustomer() {
         return customer;

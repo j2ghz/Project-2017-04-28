@@ -8,7 +8,7 @@ import javax.swing.*;
 /**
  * Created by jakob on 24-Apr-17.
  */
-public class LoginUI extends JFrame{
+public class LoginUI extends JFrame {
     private JPanel pnHolding;
     private JTextField tfUsername;
     private JTextField tfPassword;
@@ -16,11 +16,23 @@ public class LoginUI extends JFrame{
     private JLabel lbUsername;
     private JLabel lbPassword;
 
-    public LoginUI(UserManager um, DB db){
-
-        btLogin.addActionListener(Action -> um.login(tfUsername.getText(),tfPassword.getText()));
-
-        
+    public static void main(UserManager um, DB db) {
+        JFrame frame = new JFrame("LoginUI");
+        frame.setContentPane(new LoginUI(um, db).pnHolding);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
+    public LoginUI(UserManager um, DB db) {
+        btLogin.addActionListener(Action -> authenticate(um, db));
+    }
+
+    public void authenticate(UserManager um, DB db) {
+        if (um.login(tfUsername.getText(), tfPassword.getText())) {
+            MainMenu menu = new MainMenu(db);
+        }else{
+            JOptionPane.showConfirmDialog(pnHolding,"Login failed, wrong username or password.");
+        }
+    }
 }

@@ -11,6 +11,15 @@ public class Customer {
     private Date dateOfBirth;
     private String name;
 
+    public Customer(int id, String phoneNumber, String address, String email, Date dateOfBirth, String name) {
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
