@@ -9,6 +9,16 @@ public class Employee {
     private String email;
     private String bankAccount;
 
+    public Employee(String name, String position, int id, String phoneNumber, String address, String email, String bankAccount) {
+        this.name = name;
+        this.position = position;
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.bankAccount = bankAccount;
+    }
+
     public String getName() {
         return name;
     }
