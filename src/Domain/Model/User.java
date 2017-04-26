@@ -11,10 +11,11 @@ public class User {
         return employee;
     }
 
-    public User(String group, String login, String password) {
+    public User(String group, String login, String password, Employee employee) {
         this.group = group;
         this.login = login;
         this.password = password;
+        this.employee = employee;
     }
 
     public void setEmployee(Employee employee) {

@@ -1,5 +1,6 @@
 package UI.Swing;
 
+import Domain.Model.Employee;
 import Domain.Model.User;
 import Services.Database.DB;
 import com.sun.xml.internal.bind.v2.TODO;
@@ -39,6 +40,21 @@ public class UserAdminUI {
     private JLabel lbPasswordDelete;
     private JTextField tfPasswordCurrent;
     private JLabel lbPasswordCurrent;
+    private JTextField tfPosition;
+    private JTextField tfId;
+    private JTextField tfPhone;
+    private JTextField tfAddress;
+    private JTextField tfEmail;
+    private JTextField tfBank;
+    private JLabel lbPosition;
+    private JLabel lbId;
+    private JLabel lbPhone;
+    private JLabel lbAddress;
+    private JLabel lbEmail;
+    private JLabel lbBank;
+    private JLabel lbInformation;
+    private JTextField tfName;
+    private JLabel lbName;
 
     public static void main(DB db) {
         JFrame frame = new JFrame("UserAdminUI");
@@ -59,10 +75,22 @@ public class UserAdminUI {
         String password = tfPasswordCreate.getText();
         String group = tfGroupCreate.getText();
 
-        //TODO user does not have an employee object
+        Employee employee = null;
 
-        if (username != null && password != null && group != null) {
-            User user = new User(username, password, group);
+        String empName = tfName.getText();
+        String position = tfPosition.getText();
+        int id = Integer.parseInt(tfId.getText());
+        String phone = tfPhone.getText();
+        String address = tfAddress.getText();
+        String email = tfEmail.getText();
+        String bank = tfBank.getText();
+
+        if(empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null){
+            employee = new Employee(empName,position,id,phone,address,email,bank);
+        }
+
+        if (username != null && password != null && group != null && employee != null) {
+            User user = new User(username, password, group, employee);
             db.addUser(user);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, user not created.");
