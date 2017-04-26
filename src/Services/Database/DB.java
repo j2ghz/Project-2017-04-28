@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DB {
     private Connection con;
@@ -65,7 +66,7 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public Customer getCustomer(/*identifier*/) {
+    public Customer getCustomer(int id) {
         throw new NotImplementedException();
     }
 
@@ -182,6 +183,10 @@ public class DB {
     }
 
     public ArrayList<ToDo> getToDos() {
+        throw new NotImplementedException();
+    }
+
+    public ArrayList<ToDo> getToDos(Date date) {
         throw new NotImplementedException();
     }
 

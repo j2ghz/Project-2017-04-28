@@ -38,7 +38,7 @@ public class ArrangementReservationUI {
     }
 
     public ArrangementReservationUI(DB db) {
-        btCreateReservation.addActionListener(Action -> createReservation());
+        btCreateReservation.addActionListener(Action -> createReservation(db));
     }
 
     private void createReservation(DB db) {

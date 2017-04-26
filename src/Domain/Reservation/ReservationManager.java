@@ -21,12 +21,7 @@ public class ReservationManager {
     }
 
     public void reserveRoom(Date checkIn, Date checkOut, Room room) {
-        RoomReservation reservation = new RoomReservation();
-        reservation.setCheckIn(checkIn);
-        reservation.setChekcOut(checkOut);
-        reservation.setRoom(room);
-        reservation.setMenus(new ArrayList<>());
-        reservation.setRoomServices(new ArrayList<>());
+        RoomReservation reservation = new RoomReservation(checkIn,checkOut,null,room);
 
         db.addRoomReservation(reservation);
     }

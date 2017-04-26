@@ -35,7 +35,7 @@ public class CateringReservationUI {
 
     public static void main(DB db) {
         JFrame frame = new JFrame("CateringReservationUI");
-        frame.setContentPane(new CateringReservationUI().pnHolding);
+        frame.setContentPane(new CateringReservationUI(db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
