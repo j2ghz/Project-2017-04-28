@@ -52,12 +52,15 @@ public class UserAdminUI {
     private JLabel lbAddress;
     private JLabel lbEmail;
     private JLabel lbBank;
-    private JLabel lbInformation;
     private JTextField tfName;
     private JLabel lbName;
+    private JPanel pnCreateEmp;
+    private JTextField tfCreateUserEmpId;
+    private JLabel lbCreateUserEmpId;
+    private JButton btCreateEmp;
 
     public static void main(DB db) {
-        JFrame frame = new JFrame("UserAdminUI");
+        JFrame frame = new JFrame("User Administration");
         frame.setContentPane(new UserAdminUI(db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -68,6 +71,7 @@ public class UserAdminUI {
         btCreateUser.addActionListener(Action -> createUser(db));
         btDeleteUser.addActionListener(Action -> deleteUser(db));
         btUpdateUser.addActionListener(Action -> editUser(db));
+        btCreateEmp.addActionListener(Action -> createEmp(db));
     }
 
     private void createUser(DB db) {
@@ -75,19 +79,7 @@ public class UserAdminUI {
         String password = tfPasswordCreate.getText();
         String group = tfGroupCreate.getText();
 
-        Employee employee = null;
-
-        String empName = tfName.getText();
-        String position = tfPosition.getText();
-        int id = Integer.parseInt(tfId.getText());
-        String phone = tfPhone.getText();
-        String address = tfAddress.getText();
-        String email = tfEmail.getText();
-        String bank = tfBank.getText();
-
-        if(empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null){
-            employee = new Employee(empName,position,id,phone,address,email,bank);
-        }
+        Employee employee = db.getEmployee(Integer.parseInt(tfCreateUserEmpId.getText()));
 
         if (username != null && password != null && group != null && employee != null) {
             User user = new User(username, password, group, employee);
@@ -135,5 +127,23 @@ public class UserAdminUI {
         }
 
         JOptionPane.showConfirmDialog(pnHolding, confirmation);
+    }
+
+    private void createEmp(DB db){
+
+        String empName = tfName.getText();
+        String position = tfPosition.getText();
+        int id = Integer.parseInt(tfId.getText());
+        String phone = tfPhone.getText();
+        String address = tfAddress.getText();
+        String email = tfEmail.getText();
+        String bank = tfBank.getText();
+
+        Employee employee = null;
+
+        if(empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null){
+            employee = new Employee(empName,position,id,phone,address,email,bank);
+            db.addEmployee(employee);
+        }
     }
 }

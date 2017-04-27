@@ -19,7 +19,7 @@ public class ToDoUI {
     private JLabel lbToDo;
 
     public static void main(DB db) {
-        JFrame frame = new JFrame("ToDoUI");
+        JFrame frame = new JFrame("To-Do");
         frame.setContentPane(new ToDoUI(db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
