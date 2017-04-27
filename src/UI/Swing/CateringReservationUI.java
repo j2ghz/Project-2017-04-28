@@ -2,6 +2,7 @@ package UI.Swing;
 
 import Domain.Model.Catering;
 import Domain.Model.Customer;
+import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
 
 import javax.swing.*;
@@ -42,26 +43,15 @@ public class CateringReservationUI {
     }
 
     private void createReservation(DB db) {
-        int noMeals = Integer.parseInt(tfNoMeals.getText());
-        String typeOfFood = tfTypeOfFood.getText();
-        String location = tfLocation.getText();
-        Date date = null;
+        ReservationManager rm = new ReservationManager(db);
+        JOptionPane jOptionPane = new JOptionPane(pnHolding);
+        jOptionPane.setVisible(false);
+
         try {
-            date = new SimpleDateFormat().parse(tfDate.getText());
+            rm.createCateringReservation(Integer.parseInt(tfNoMeals.getText()), tfTypeOfFood.getText(), tfLocation.getText(), new SimpleDateFormat().parse(tfDate.getText()), Integer.parseInt(tfCateringID.getText()), Double.parseDouble(tfPrice.getText()), db.getCustomer(Integer.parseInt(tfCustomer.getText())), jOptionPane);
+
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered date was invalid, reservation was not created.");
-        }
-        int customerID = Integer.parseInt(tfCustomer.getText());
-        Double price = Double.parseDouble(tfPrice.getText());
-        int cateringID = Integer.parseInt(tfCateringID.getText());
-
-        Customer customer = db.getCustomer(customerID);
-
-        if (date != null && noMeals != 0 && typeOfFood != null && location != null && customerID != 0 && price != 0 && cateringID != 0) {
-            Catering catering = new Catering(noMeals, typeOfFood, location, date, cateringID, price, customer);
-            db.addCatering(catering);
-        }else{
-            JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, reservation was not created");
         }
     }
 }

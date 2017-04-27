@@ -1,5 +1,6 @@
 package UI.Swing;
 
+import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
 
 import javax.swing.*;
@@ -27,10 +28,7 @@ public class DeleteRoomRes {
     }
 
     private void deleteRoomRes(DB db){
-        int resId = Integer.parseInt(tfResId.getText());
-
-        if(resId != 0){
-            db.deleteRoomReservation(db.getRoomReservation(resId));
-        }
+        ReservationManager rm = new ReservationManager(db);
+        rm.deleteRoomReservation(Integer.parseInt(tfResId.getText()));
     }
 }

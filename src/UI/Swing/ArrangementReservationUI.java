@@ -2,6 +2,7 @@ package UI.Swing;
 
 import Domain.Model.Arrangement;
 import Domain.Model.Customer;
+import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
 
 import javax.swing.*;
@@ -42,26 +43,14 @@ public class ArrangementReservationUI {
     }
 
     private void createReservation(DB db) {
-        Date date = null;
+        ReservationManager rm = new ReservationManager(db);
+        JOptionPane jOptionPane = new JOptionPane();
+        jOptionPane.setVisible(false);
+
         try {
-            date = new SimpleDateFormat().parse(tfDate.getText());
+            rm.createArrangementReservation(new SimpleDateFormat().parse(tfDate.getText()), Integer.parseInt(tfEventID.getText()), Double.parseDouble(tfPrice.getText()), Integer.parseInt(tfCustomer.getText()), tfEventName.getText(), tfDescription.getText(), db.getCustomer(Integer.parseInt(tfCustomer.getText())), Integer.parseInt(tfEventSize.getText()), jOptionPane);
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered date was invalid, reservation was not created.");
-        }
-        int arrangementID = Integer.parseInt(tfEventID.getText());
-        int customerID = Integer.parseInt(tfCustomer.getText());
-        Double price = Double.parseDouble(tfPrice.getText());
-        String arrangementName = tfEventName.getText();
-        String description = tfDescription.getText();
-        int eventSize = Integer.parseInt(tfEventSize.getText());
-
-        Customer customer = db.getCustomer(customerID);
-
-        if (date != null && arrangementID != 0 && price != 0 && customerID != 0 && arrangementName != null && description != null && customer != null && eventSize != 0) {
-            Arrangement arrangement = new Arrangement(date, arrangementID, price, customerID, arrangementName, description, customer, eventSize);
-            db.addArrangement(arrangement);
-        } else {
-            JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, reservation was not created");
         }
     }
 }
