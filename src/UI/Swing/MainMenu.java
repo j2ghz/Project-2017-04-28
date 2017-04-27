@@ -14,9 +14,11 @@ public class MainMenu {
     private JButton btCateringReservation;
     private JButton btArrangementReservation;
     private JButton btCreateToDo;
+    private JButton btDeletRoomRes;
+    private JButton btUpdRoomRes;
 
     public static void main(DB db) {
-        JFrame frame = new JFrame("MainMenu");
+        JFrame frame = new JFrame("Main Menu");
         frame.setContentPane(new MainMenu(db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

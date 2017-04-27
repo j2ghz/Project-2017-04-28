@@ -56,7 +56,7 @@ public class StandardReservationUI {
     private JLabel lbServicePrice;
 
     public static void main(DB db) {
-        JFrame frame = new JFrame("StandardReservationUI");
+        JFrame frame = new JFrame("Room Reservation");
         frame.setContentPane(new StandardReservationUI(db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -83,6 +83,7 @@ public class StandardReservationUI {
 
         if (custAddress != null && custName != null && custEmail != null && custPhone != null && custBirth != null) {
             Customer customer = new Customer(custID, custPhone, custAddress, custEmail, custBirth, custName);
+            db.addCustomer(customer);
             createRoom(db, customer);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information about the customer missing, reservation was not created.");

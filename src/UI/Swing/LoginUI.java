@@ -17,7 +17,7 @@ public class LoginUI extends JFrame {
     private JLabel lbPassword;
 
     public static void main(UserManager um, DB db) {
-        JFrame frame = new JFrame("LoginUI");
+        JFrame frame = new JFrame("Login");
         frame.setContentPane(new LoginUI(um, db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

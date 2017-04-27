@@ -30,7 +30,7 @@ public class ArrangementReservationUI {
     private JLabel lbEventID;
 
     public static void main(DB db) {
-        JFrame frame = new JFrame("ArrangementReservationUI");
+        JFrame frame = new JFrame("Arrangement Reservation");
         frame.setContentPane(new ArrangementReservationUI(db).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
