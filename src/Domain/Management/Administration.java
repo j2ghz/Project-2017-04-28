@@ -91,9 +91,9 @@ public class Administration {
         throw new NotImplementedException();
     }
 
-    public void createRoom(double price, String name, int number, int bedCount, JOptionPane jOptionPane) {
+    public void createRoom(double price, String name, int number, int bedCount,String desc, JOptionPane jOptionPane) {
         if (price != 0 && name != null && number != 0 && bedCount != 0) {
-            Room room = new Room(price, name, number, bedCount);
+            Room room = new Room(price, name, number, bedCount, desc);
             db.addRoom(room);
         } else {
             jOptionPane.setMessage("There was some information about the room missing, reservation was not created.");

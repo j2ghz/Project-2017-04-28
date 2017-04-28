@@ -56,6 +56,10 @@ public class StandardReservationUI {
     private JLabel lbRoomNumber;
     private JLabel lbServiceName;
     private JLabel lbServicePrice;
+    private JTextField tfRoomDesc;
+    private JLabel lbRoomDesc;
+    private JLabel lbResId;
+    private JTextField tfResId;
 
     public static void main(DB db) {
         JFrame frame = new JFrame("Room Reservation");
@@ -80,7 +84,7 @@ public class StandardReservationUI {
             JOptionPane.showConfirmDialog(pnHolding, "The entered birthdate was invalid, customer was not created.");
         }
 
-        admin.createRoom(Double.parseDouble(tfRoomPrice.getText()), tfRoomName.getText(), Integer.parseInt(tfRoomNumber.getText()), Integer.parseInt(tfSize.getText()), jOptionPane);
+        admin.createRoom(Double.parseDouble(tfRoomPrice.getText()), tfRoomName.getText(), Integer.parseInt(tfRoomNumber.getText()), Integer.parseInt(tfSize.getText()),tfRoomDesc.getText(), jOptionPane);
 
         Customer customer = admin.getCustomer(Integer.parseInt(tfCustID.getText()));
 

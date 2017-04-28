@@ -24,6 +24,11 @@ public class DB {
 
     }
 
+    public void sqlError(SQLException e) {
+        e.printStackTrace();
+        System.exit(1);
+    }
+
     public ArrayList<Arrangement> getArrangements() {
         throw new NotImplementedException();
     }
@@ -32,7 +37,9 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addArrangement(Arrangement arrangement)throws SQLException{
+    public void addArrangement(Arrangement arrangement) {
+
+        try {
             ps = con.prepareStatement("INSERT INTO tbl_Arrangement VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             ps.setInt(1, arrangement.getId());
@@ -45,33 +52,42 @@ public class DB {
 
             ps.executeUpdate();
             ps.close();
-
-            throw new NotImplementedException();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteArrangement(Arrangement arrangement) throws SQLException{
-        ps = con.prepareStatement("DELETE FROM tbl_Arrangement WHERE fld_ArrID = ?");
-        ps.setInt(1,arrangement.getId());
+    public void deleteArrangement(Arrangement arrangement) {
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_Arrangement WHERE fld_ArrID = ?");
+            ps.setInt(1, arrangement.getId());
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateArrangement(Arrangement arrangement)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_Arrangement SET fld_ArrName = ? ,SET fld_ArrDescription = ?,SET fld_ArrDate = ?,SET fld_ArrPrice = ?,SET fld_ArrPartNo = ?,SET fld_CustID = ? WHERE fld_ArrID = ?");
-        ps.setString(1,arrangement.getName());
-        ps.setString(2,arrangement.getDescription());
-        ps.setString(3,arrangement.getDate().toString());
-        ps.setDouble(4,arrangement.getPrice());
-        ps.setInt(5,arrangement.getParticipantNo());
-        ps.setInt(6, arrangement.getCustomerId());
-        ps.setInt(7,arrangement.getId());
+    public void updateArrangement(Arrangement arrangement) {
 
-        ps.executeUpdate();
-        ps.close();
+        try {
+            ps = con.prepareStatement("UPDATE tbl_Arrangement SET fld_ArrName = ? ,SET fld_ArrDescription = ?,SET fld_ArrDate = ?,SET fld_ArrPrice = ?,SET fld_ArrPartNo = ?,SET fld_CustID = ? WHERE fld_ArrID = ?");
+            ps.setString(1, arrangement.getName());
+            ps.setString(2, arrangement.getDescription());
+            ps.setString(3, arrangement.getDate().toString());
+            ps.setDouble(4, arrangement.getPrice());
+            ps.setInt(5, arrangement.getParticipantNo());
+            ps.setInt(6, arrangement.getCustomerId());
+            ps.setInt(7, arrangement.getId());
 
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+
     }
 
     public ArrayList<Catering> getCaterings() {
@@ -82,46 +98,58 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addCatering(Catering catering)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_Catering VALUES (?,?,?,?,?,?,?)");
+    public void addCatering(Catering catering) {
 
-        ps.setInt(1,catering.getId());
-        ps.setInt(2,catering.getNumberOfMeals());
-        ps.setString(3,catering.getFoodType());
-        ps.setString(4,catering.getLocation());
-        ps.setString(5,catering.getDate().toString());
-        ps.setDouble(6,catering.getPrice());
-        ps.setInt(7,catering.getCustomer().getId());
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_Catering VALUES (?,?,?,?,?,?,?)");
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.setInt(1, catering.getId());
+            ps.setInt(2, catering.getNumberOfMeals());
+            ps.setString(3, catering.getFoodType());
+            ps.setString(4, catering.getLocation());
+            ps.setString(5, catering.getDate().toString());
+            ps.setDouble(6, catering.getPrice());
+            ps.setInt(7, catering.getCustomer().getId());
+
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteCatering(Catering catering)throws SQLException{
-        ps = con.prepareStatement("DELETE FROM tbl_Catering WHERE fld_CatOrderID = ?");
-        ps.setInt(1,catering.getId());
+    public void deleteCatering(Catering catering) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_Catering WHERE fld_CatOrderID = ?");
+            ps.setInt(1, catering.getId());
 
-        ps.executeUpdate();
-        ps.close();
-
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateCatering(Catering catering)throws SQLException{
-        ps = con.prepareStatement("UPDATE tbl_Catering SET fld_CatNoOfMeals = ? ,SET CatTypeOfFood = ?,SET fld_CatLocation = ?,SET fld_CatDate = ?,SET fld_CatPrice = ?,SET fld_CustID = ? WHERE fld_CatOrderID = ?");
+    public void updateCatering(Catering catering) {
 
-        ps.setInt(1,catering.getNumberOfMeals());
-        ps.setString(2,catering.getFoodType());
-        ps.setString(3,catering.getLocation());
-        ps.setString(4,catering.getDate().toString());
-        ps.setDouble(5,catering.getPrice());
-        ps.setInt(6, catering.getCustomer().getId());
-        ps.setInt(7,catering.getId());
+        try {
+            ps = con.prepareStatement("UPDATE tbl_Catering SET fld_CatNoOfMeals = ? ,SET CatTypeOfFood = ?,SET fld_CatLocation = ?,SET fld_CatDate = ?,SET fld_CatPrice = ?,SET fld_CustID = ? WHERE fld_CatOrderID = ?");
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.setInt(1, catering.getNumberOfMeals());
+            ps.setString(2, catering.getFoodType());
+            ps.setString(3, catering.getLocation());
+            ps.setString(4, catering.getDate().toString());
+            ps.setDouble(5, catering.getPrice());
+            ps.setInt(6, catering.getCustomer().getId());
+            ps.setInt(7, catering.getId());
+
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<Customer> getCustomers() {
@@ -132,43 +160,54 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addCustomer(Customer customer) throws SQLException{
-        ps = con.prepareStatement("INSERT INTO tbl_Customer VALUES (?,?,?,?,?,?)");
+    public void addCustomer(Customer customer) {
 
-        ps.setInt(1,customer.getId());
-        ps.setString(2,customer.getName());
-        ps.setString(3,customer.getPhoneNumber());
-        ps.setString(4,customer.getAddress());
-        ps.setString(5,customer.getDateOfBirth().toString());
-        ps.setString(6,customer.getEmail());
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_Customer VALUES (?,?,?,?,?,?)");
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.setInt(1, customer.getId());
+            ps.setString(2, customer.getName());
+            ps.setString(3, customer.getPhoneNumber());
+            ps.setString(4, customer.getAddress());
+            ps.setString(5, customer.getDateOfBirth().toString());
+            ps.setString(6, customer.getEmail());
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteCustomer(Customer customer) throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_Customer WHERE fld_CustID = ?");
-        ps.setInt(1,customer.getId());
+    public void deleteCustomer(Customer customer) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_Customer WHERE fld_CustID = ?");
+            ps.setInt(1, customer.getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateCustomer(Customer customer)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_Customer SET fld_CustName = ?, SET fld_CustPhone = ?, SET fld_CustAddress = ?, SET fld_CustDateOfBirth = ?, SET fld_CustEmail = ?, WHERE fld_CustID =?)");
+    public void updateCustomer(Customer customer) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_Customer SET fld_CustName = ?, SET fld_CustPhone = ?, SET fld_CustAddress = ?, SET fld_CustDateOfBirth = ?, SET fld_CustEmail = ?, WHERE fld_CustID =?)");
 
-        ps.setString(1,customer.getName());
-        ps.setString(2,customer.getPhoneNumber());
-        ps.setString(3,customer.getAddress());
-        ps.setString(4,customer.getDateOfBirth().toString());
-        ps.setString(5,customer.getEmail());
-        ps.setInt(6,customer.getId());
+            ps.setString(1, customer.getName());
+            ps.setString(2, customer.getPhoneNumber());
+            ps.setString(3, customer.getAddress());
+            ps.setString(4, customer.getDateOfBirth().toString());
+            ps.setString(5, customer.getEmail());
+            ps.setInt(6, customer.getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<Employee> getEmployees() {
@@ -179,44 +218,53 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addEmployee(Employee employee)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_Employee VALUES (?,?,?,?,?,?,?)");
+    public void addEmployee(Employee employee) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_Employee VALUES (?,?,?,?,?,?,?)");
 
-        ps.setInt(1,employee.getId());
-        ps.setString(2,employee.getName());
-        ps.setString(3,employee.getPhoneNumber());
-        ps.setString(4,employee.getPosition());
-        ps.setString(5,employee.getAddress());
-        ps.setString(6,employee.getEmail());
-        ps.setString(7,employee.getBankAccount());
+            ps.setInt(1, employee.getId());
+            ps.setString(2, employee.getName());
+            ps.setString(3, employee.getPhoneNumber());
+            ps.setString(4, employee.getPosition());
+            ps.setString(5, employee.getAddress());
+            ps.setString(6, employee.getEmail());
+            ps.setString(7, employee.getBankAccount());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteEmployee(Employee employee)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_Employee WHERE fld_EmpID = ?");
-        ps.setInt(1,employee.getId());
+    public void deleteEmployee(Employee employee) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_Employee WHERE fld_EmpID = ?");
+            ps.setInt(1, employee.getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateEmployee(Employee employee) throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_Employee SET fld_EmpName = ?, SET fld_EmpPhone = ?, SET fldPosition = ?, SET fld_EmpAddress = ?, Set fld_EmpEmail = ?, SET fld_EmpBankAccount = ? WHERE fld_EmpID = ? ");
-        ps.setString(1,employee.getName());
-        ps.setString(2,employee.getPhoneNumber());
-        ps.setString(3,employee.getPosition());
-        ps.setString(4,employee.getAddress());
-        ps.setString(5,employee.getEmail());
-        ps.setString(6,employee.getBankAccount());
-        ps.setInt(7,employee.getId());
+    public void updateEmployee(Employee employee) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_Employee SET fld_EmpName = ?, SET fld_EmpPhone = ?, SET fldPosition = ?, SET fld_EmpAddress = ?, Set fld_EmpEmail = ?, SET fld_EmpBankAccount = ? WHERE fld_EmpID = ? ");
+            ps.setString(1, employee.getName());
+            ps.setString(2, employee.getPhoneNumber());
+            ps.setString(3, employee.getPosition());
+            ps.setString(4, employee.getAddress());
+            ps.setString(5, employee.getEmail());
+            ps.setString(6, employee.getBankAccount());
+            ps.setInt(7, employee.getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<Menu> getMenus() {
@@ -227,33 +275,42 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addMenu(Menu menu)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_Menu VALUES (?,?)");
-        ps.setString(1,menu.getName());
-        ps.setDouble(2,menu.getPrice());
+    public void addMenu(Menu menu) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_Menu VALUES (?,?)");
+            ps.setString(1, menu.getName());
+            ps.setDouble(2, menu.getPrice());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteMenu(Menu menu)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_Menu WHERE fld_MenuName = ?");
-        ps.setString(1,menu.getName());
+    public void deleteMenu(Menu menu) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_Menu WHERE fld_MenuName = ?");
+            ps.setString(1, menu.getName());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateMenu(Menu menu)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_Menu SET fld_MenuPrice = ? WHERE fld_MenuName = ?");
-        ps.setDouble(1,menu.getPrice());
-        ps.setString(2,menu.getName());
+    public void updateMenu(Menu menu) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_Menu SET fld_MenuPrice = ? WHERE fld_MenuName = ?");
+            ps.setDouble(1, menu.getPrice());
+            ps.setString(2, menu.getName());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<Room> getRooms() {
@@ -264,37 +321,46 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addRoom(Room room)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_Room VALUES (?,?,?,?)");
-        ps.setInt(1,room.getNumber());
-        ps.setString(2,room.getDescription());
-        ps.setInt(3,room.getBedCount());
-        ps.setDouble(4,room.getPrice());
+    public void addRoom(Room room) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_Room VALUES (?,?,?,?)");
+            ps.setInt(1, room.getNumber());
+            ps.setString(2, room.getDescription());
+            ps.setInt(3, room.getBedCount());
+            ps.setDouble(4, room.getPrice());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteRoom(Room room)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_Room WHERE fld_RoomNo = ?");
-        ps.setInt(1,room.getNumber());
+    public void deleteRoom(Room room) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_Room WHERE fld_RoomNo = ?");
+            ps.setInt(1, room.getNumber());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateRoom(Room room)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_Room SET fld_RoomDescription = ?, SET fld_RoomBedNo = ?, SET fld_RoomPrice = ? WHERE fld_RoomNo = ?");
-        ps.setString(1,room.getDescription());
-        ps.setInt(2,room.getBedCount());
-        ps.setDouble(3,room.getPrice());
-        ps.setInt(4,room.getNumber());
+    public void updateRoom(Room room) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_Room SET fld_RoomDescription = ?, SET fld_RoomBedNo = ?, SET fld_RoomPrice = ? WHERE fld_RoomNo = ?");
+            ps.setString(1, room.getDescription());
+            ps.setInt(2, room.getBedCount());
+            ps.setDouble(3, room.getPrice());
+            ps.setInt(4, room.getNumber());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<RoomReservation> getRoomReservations() {
@@ -305,39 +371,48 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addRoomReservation(RoomReservation roomReservation)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_RoomReservation VALUES (?,?,?,?,?)");
-        ps.setInt(1,roomReservation.getId());
-        ps.setString(2,roomReservation.getCheckIn().toString());
-        ps.setString(3,roomReservation.getCheckOut().toString());
-        ps.setInt(4,roomReservation.getRoom().getNumber());
-        ps.setInt(5,roomReservation.getCustomer().getId());
+    public void addRoomReservation(RoomReservation roomReservation) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_RoomReservation VALUES (?,?,?,?,?)");
+            ps.setInt(1, roomReservation.getId());
+            ps.setString(2, roomReservation.getCheckIn().toString());
+            ps.setString(3, roomReservation.getCheckOut().toString());
+            ps.setInt(4, roomReservation.getRoom().getNumber());
+            ps.setInt(5, roomReservation.getCustomer().getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteRoomReservation(RoomReservation roomReservation)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_RoomReservation WHERE fld_RRID = ?");
-        ps.setInt(1,roomReservation.getId());
+    public void deleteRoomReservation(RoomReservation roomReservation) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_RoomReservation WHERE fld_RRID = ?");
+            ps.setInt(1, roomReservation.getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateRoomReservation(RoomReservation roomReservation)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_RoomReservation SET fld_RRCheckIn = ?, set fld_RRCheckOut = ?, set fld_RoomNo = ?, set fld_CustID = ? WHERE fld_RRID = ?");
-        ps.setString(1,roomReservation.getCheckIn().toString());
-        ps.setString(2,roomReservation.getCheckOut().toString());
-        ps.setInt(3,roomReservation.getRoom().getNumber());
-        ps.setInt(4,roomReservation.getCustomer().getId());
-        ps.setInt(5,roomReservation.getId());
+    public void updateRoomReservation(RoomReservation roomReservation) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_RoomReservation SET fld_RRCheckIn = ?, set fld_RRCheckOut = ?, set fld_RoomNo = ?, set fld_CustID = ? WHERE fld_RRID = ?");
+            ps.setString(1, roomReservation.getCheckIn().toString());
+            ps.setString(2, roomReservation.getCheckOut().toString());
+            ps.setInt(3, roomReservation.getRoom().getNumber());
+            ps.setInt(4, roomReservation.getCustomer().getId());
+            ps.setInt(5, roomReservation.getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<RoomService> getRoomServices() {
@@ -348,33 +423,42 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addRoomService(RoomService roomService)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_RoomService VALUES (?,?)");
-        ps.setString(1,roomService.getName());
-        ps.setDouble(2,roomService.getPrice());
+    public void addRoomService(RoomService roomService) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_RoomService VALUES (?,?)");
+            ps.setString(1, roomService.getName());
+            ps.setDouble(2, roomService.getPrice());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteRoomService(RoomService roomService)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_RoomService WHERE fld_RSName = ?");
-        ps.setString(1,roomService.getName());
+    public void deleteRoomService(RoomService roomService) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_RoomService WHERE fld_RSName = ?");
+            ps.setString(1, roomService.getName());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateRoomService(RoomService roomService)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_RoomService SET fld_RSPrice = ? WHERE fld_RSName = ?");
-        ps.setString(1,roomService.getName());
-        ps.setDouble(2,roomService.getPrice());
+    public void updateRoomService(RoomService roomService) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_RoomService SET fld_RSPrice = ? WHERE fld_RSName = ?");
+            ps.setString(1, roomService.getName());
+            ps.setDouble(2, roomService.getPrice());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<ToDo> getToDos() {
@@ -389,74 +473,94 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public void addToDo(ToDo toDo)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_ToDO VALUES (?,?,?)");
-        ps.setString(1,toDo.getDescription());
-        ps.setString(2,toDo.getDate().toString());
-        ps.setInt(3,toDo.getEmployee().getId());
+    public void addToDo(ToDo toDo) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_ToDO VALUES (?,?,?)");
+            ps.setString(1, toDo.getDescription());
+            ps.setString(2, toDo.getDate().toString());
+            ps.setInt(3, toDo.getEmployee().getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void deleteToDo(ToDo toDo)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_ToDO WHERE fld_TDDescription = ?");
-        ps.setString(1,toDo.getDescription());
+    public void deleteToDo(ToDo toDo) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_ToDO WHERE fld_TDDescription = ?");
+            ps.setString(1, toDo.getDescription());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateToDo(ToDo toDo)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_ToDO SET fld_TDDate = ?, SET fld_EmpID = ? WHERE fld_TDDescription = ?");
-        ps.setString(1,toDo.getDate().toString());
-        ps.setInt(2,toDo.getEmployee().getId());
-        ps.setString(3,toDo.getDescription());
+    public void updateToDo(ToDo toDo) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_ToDO SET fld_TDDate = ?, SET fld_EmpID = ? WHERE fld_TDDescription = ?");
+            ps.setString(1, toDo.getDate().toString());
+            ps.setInt(2, toDo.getEmployee().getId());
+            ps.setString(3, toDo.getDescription());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public ArrayList<User> getUsers() {
         throw new NotImplementedException();
     }
 
-    public User getUser(String user, String pass) { throw new NotImplementedException(); }
-
-    public void addUser(User user)throws SQLException {
-        ps = con.prepareStatement("INSERT INTO tbl_User VALUES (?,?,?,?)");
-        ps.setString(1,user.getGroup());
-        ps.setString(2,user.getPassword());
-        ps.setString(3,user.getLogin());
-        ps.setInt(4,user.getEmployee().getId());
-
-        ps.executeUpdate();
-        ps.close();
+    public User getUser(String user, String pass) {
         throw new NotImplementedException();
     }
 
-    public void deleteUser(User user)throws SQLException {
-        ps = con.prepareStatement("DELETE FROM tbl_User WHERE fld_UserLogin = ?");
-        ps.setString(1,user.getLogin());
+    public void addUser(User user) {
+        try {
+            ps = con.prepareStatement("INSERT INTO tbl_User VALUES (?,?,?,?)");
+            ps.setString(1, user.getGroup());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getLogin());
+            ps.setInt(4, user.getEmployee().getId());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
-    public void updateUser(User user)throws SQLException {
-        ps = con.prepareStatement("UPDATE tbl_User SET fld_UserPassword = ?, SET fld_UserGroup, SET fld_EmpID = ? WHERE fld_UserLogin = ?");
-        ps.setString(1,user.getGroup());
-        ps.setString(2,user.getPassword());
-        ps.setInt(3,user.getEmployee().getId());
-        ps.setString(4,user.getLogin());
+    public void deleteUser(User user) {
+        try {
+            ps = con.prepareStatement("DELETE FROM tbl_User WHERE fld_UserLogin = ?");
+            ps.setString(1, user.getLogin());
 
-        ps.executeUpdate();
-        ps.close();
-        throw new NotImplementedException();
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+    }
+
+    public void updateUser(User user) {
+        try {
+            ps = con.prepareStatement("UPDATE tbl_User SET fld_UserPassword = ?, SET fld_UserGroup, SET fld_EmpID = ? WHERE fld_UserLogin = ?");
+            ps.setString(1, user.getGroup());
+            ps.setString(2, user.getPassword());
+            ps.setInt(3, user.getEmployee().getId());
+            ps.setString(4, user.getLogin());
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
 }

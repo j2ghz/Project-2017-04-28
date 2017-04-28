@@ -40,6 +40,10 @@ public class UpdateRoomRes {
     private JLabel lbRoomNumber;
     private JTextField tfRoomNumber;
     private JButton btUpdateRes;
+    private JTextField tfRoomDesc;
+    private JLabel lbRoomDesc;
+    private JTextField tfResId;
+    private JLabel lbResId;
 
 
     public static void main(DB db) {
@@ -83,9 +87,10 @@ public class UpdateRoomRes {
         String name = tfRoomName.getText();
         int roomNumber = Integer.parseInt(tfRoomNumber.getText());
         int roomSize = Integer.parseInt(tfSize.getText());
+        String roomDesc = tfRoomDesc.getText();
 
         if (price != 0 && name != null && roomNumber != 0 && roomSize != 0) {
-            Room room = new Room(price, name, roomNumber, roomSize);
+            Room room = new Room(price, name, roomNumber, roomSize, roomDesc);
             updateRoomReservation(db, room, customer);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information about the room missing, reservation was not updated.");
