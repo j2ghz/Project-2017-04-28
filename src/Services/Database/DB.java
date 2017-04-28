@@ -208,11 +208,44 @@ public class DB {
     }
 
     public ArrayList<Employee> getEmployees() {
-        throw new NotImplementedException();
+        try {
+            ps = con.prepareStatement("SELECT * FROM tbl_Employee");
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Employee> employeeList = new ArrayList<>();
+
+            while (rs.next()) {
+                Employee e = new Employee(rs.getString(2), rs.getString(4), rs.getInt(1), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7));
+                employeeList.add(e);
+            }
+
+            ps.close();
+            return employeeList;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+
+        return null;
     }
 
-    public Employee getEmployee(/*identifier*/int i) {
-        throw new NotImplementedException();
+    public Employee getEmployee(int i) {
+        try {
+            ps = con.prepareStatement("SELECT * FROM tbl_Employee WHERE fld_EmpID=?");
+
+            ps.setString(1, Integer.toString(i));
+
+            ResultSet rs = ps.executeQuery();
+
+            Employee e = new Employee(rs.getString(2), rs.getString(4), rs.getInt(1), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7));
+
+            ps.close();
+            return e;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+
+        return null;
     }
 
     public void addEmployee(Employee employee) {
@@ -314,8 +347,23 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public Room getRoom(/*identifier*/) {
-        throw new NotImplementedException();
+    public Room getRoom(int i) {
+        try {
+            ps = con.prepareStatement("SELECT * FROM tbl_Room WHERE fld_RoomNo=?");
+
+            ps.setString(1, Integer.toString(i));
+
+            ResultSet rs = ps.executeQuery();
+
+            Room r = new Room(rs.getDouble(4),rs.getString(5), rs.getInt(1), rs.getInt(3), rs.getString(2));
+
+            ps.close();
+            return r;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+
+        return null;
     }
 
     public void addRoom(Room room) {
@@ -364,8 +412,25 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public RoomReservation getRoomReservation(int id) {
-        throw new NotImplementedException();
+    public RoomReservation getRoomReservation(int id) {try {
+        ps = con.prepareStatement("SELECT * FROM tbl_RoomReservation WHERE fld_RRID=?");
+
+        ps.setString(1, Integer.toString(id));
+
+        ResultSet rs = ps.executeQuery();
+
+        Customer c = getCustomer(rs.getInt(5));
+        Room r = getRoom(rs.getInt(4));
+
+        RoomReservation rr = new RoomReservation(rs.getDate(2), rs.getDate(3), c, r, rs.getInt(1));
+
+        ps.close();
+        return rr;
+    } catch (SQLException e) {
+        sqlError(e);
+    }
+
+        return null;
     }
 
     public void addRoomReservation(RoomReservation roomReservation) {
@@ -518,18 +583,20 @@ public class DB {
         try {
             ps = con.prepareStatement("SELECT * FROM tbl_User WHERE fld_UserLogin=?");
 
-            ps.setString(1,user);
+            ps.setString(1, user);
 
             ResultSet rs = ps.executeQuery();
 
             Employee e = getEmployee(rs.getInt(4));
-            User u = new User(rs.getString(1),rs.getString(3),rs.getString(2),e);
+            User u = new User(rs.getString(1), rs.getString(3), rs.getString(2), e);
 
             ps.close();
             return u;
         } catch (SQLException e) {
             sqlError(e);
         }
+
+        return null;
     }
 
     public void addUser(User user) {
