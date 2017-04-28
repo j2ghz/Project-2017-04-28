@@ -1,6 +1,7 @@
 package UI.Swing;
 
 import Domain.Management.Administration;
+import Domain.Management.UserManager;
 import Domain.Model.*;
 import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
@@ -57,9 +58,9 @@ public class StandardReservationUI {
     private JLabel lbServiceName;
     private JLabel lbServicePrice;
 
-    public static void main(DB db) {
+    public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Room Reservation");
-        frame.setContentPane(new StandardReservationUI(db).pnHolding);
+        frame.setContentPane(new StandardReservationUI(rm,adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

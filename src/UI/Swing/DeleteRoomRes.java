@@ -14,21 +14,20 @@ public class DeleteRoomRes {
     private JTextField tfResId;
     private JLabel lbResId;
 
-    public DeleteRoomRes(DB db) {
-        btDeleteRoomRes.addActionListener(Action -> deleteRoomRes(db));
+    public DeleteRoomRes(ReservationManager rm) {
+        btDeleteRoomRes.addActionListener(Action -> deleteRoomRes(rm));
     }
 
-    public static void main(DB db) {
+    public static void main(ReservationManager rm) {
 
         JFrame frame = new JFrame("Delete Room Reservation");
-        frame.setContentPane(new DeleteRoomRes(db).pnHolding);
+        frame.setContentPane(new DeleteRoomRes(rm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    private void deleteRoomRes(DB db){
-        ReservationManager rm = new ReservationManager(db);
+    private void deleteRoomRes(ReservationManager rm){
         rm.deleteRoomReservation(Integer.parseInt(tfResId.getText()));
     }
 }

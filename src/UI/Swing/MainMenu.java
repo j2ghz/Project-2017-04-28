@@ -1,5 +1,8 @@
 package UI.Swing;
 
+import Domain.Management.Administration;
+import Domain.Management.UserManager;
+import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
 
 import javax.swing.*;
@@ -17,19 +20,19 @@ public class MainMenu {
     private JButton btDeletRoomRes;
     private JButton btUpdRoomRes;
 
-    public static void main(DB db) {
+    public static void main(ReservationManager rm, UserManager um, Administration adm) {
         JFrame frame = new JFrame("Main Menu");
-        frame.setContentPane(new MainMenu(db).pnHolding);
+        frame.setContentPane(new MainMenu(rm,um,adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public MainMenu(DB db){
-        btRoomReservation.addActionListener(Action -> new StandardReservationUI(db));
-        btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI(db));
-        btCateringReservation.addActionListener(Action -> new CateringReservationUI(db));
-        btCreateToDo.addActionListener(Action -> new ToDoUI(db));
-        btUserAdmin.addActionListener(Action -> new UserAdminUI(db));
+    public MainMenu(ReservationManager rm, UserManager um, Administration adm){
+        btRoomReservation.addActionListener(Action -> new StandardReservationUI());
+        btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI());
+        btCateringReservation.addActionListener(Action -> new CateringReservationUI());
+        btCreateToDo.addActionListener(Action -> new ToDoUI());
+        btUserAdmin.addActionListener(Action -> new UserAdminUI());
     }
 }
