@@ -49,14 +49,14 @@ public class UpdateRoomRes {
     private JLabel lbResId;
 
 
-    public UpdateRoomRes(ReservationManager rm, Administration adm) {
+    private UpdateRoomRes(ReservationManager rm, Administration adm) {
         btUpdateRes.addActionListener(Action -> updateReservation(rm, adm));
     }
 
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Update Room Reservation");
         frame.setContentPane(new UpdateRoomRes(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

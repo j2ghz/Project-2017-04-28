@@ -18,14 +18,14 @@ public class ToDoUI {
     private JTextField tfToDo;
     private JLabel lbToDo;
 
-    public ToDoUI(Administration adm) {
+    private ToDoUI(Administration adm) {
         btGenerateToDo.addActionListener(Action -> generateToDo(adm));
     }
 
     public static void main(Administration adm) {
         JFrame frame = new JFrame("To-Do");
         frame.setContentPane(new ToDoUI(adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
@@ -33,9 +33,10 @@ public class ToDoUI {
     private void generateToDo(Administration adm) {
         Date date = null;
         try {
-            date = new SimpleDateFormat().parse(tfToDo.getText());
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(tfToDo.getText());
         } catch (java.text.ParseException e) {
-            JOptionPane.showConfirmDialog(pnHolding, "The entered check out was invalid, reservation was not created.");
+            JOptionPane.showConfirmDialog(pnHolding, "The entered date is invalid");
+            return;
         }
 
         ArrayList<ToDo> toDo = adm.getToDos(date);

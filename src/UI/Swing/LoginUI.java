@@ -17,21 +17,21 @@ public class LoginUI extends JFrame {
     private JLabel lbUsername;
     private JLabel lbPassword;
 
-    public LoginUI(ReservationManager rm, UserManager um, Administration adm) {
+    private LoginUI(ReservationManager rm, UserManager um, Administration adm) {
         btLogin.addActionListener(Action -> authenticate(rm, um, adm));
     }
 
     public static void main(ReservationManager rm, UserManager um, Administration adm) {
         JFrame frame = new JFrame("Login");
         frame.setContentPane(new LoginUI(rm, um, adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
     public void authenticate(ReservationManager rm, UserManager um, Administration adm) {
         if (um.login(tfUsername.getText(), tfPassword.getText())) {
-            MainMenu menu = new MainMenu(rm, um, adm);
+            MainMenu.main(rm, adm);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "Login failed, wrong username or password.");
         }

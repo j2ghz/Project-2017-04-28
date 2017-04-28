@@ -13,7 +13,7 @@ public class DeleteRoomRes {
     private JTextField tfResId;
     private JLabel lbResId;
 
-    public DeleteRoomRes(ReservationManager rm) {
+    private DeleteRoomRes(ReservationManager rm) {
         btDeleteRoomRes.addActionListener(Action -> deleteRoomRes(rm));
     }
 
@@ -21,7 +21,7 @@ public class DeleteRoomRes {
 
         JFrame frame = new JFrame("Delete Room Reservation");
         frame.setContentPane(new DeleteRoomRes(rm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

@@ -4,6 +4,7 @@ import Domain.Model.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -244,22 +245,22 @@ public class DB {
     }
 
     public Employee getEmployee(int i) {
+        Employee em = null;
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Employee WHERE fld_EmpID=?");
 
             ps.setString(1, Integer.toString(i));
 
             ResultSet rs = ps.executeQuery();
-
-            Employee e = new Employee(rs.getString(2), rs.getString(4), rs.getInt(1), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7));
-
+            if (rs.next()) {
+                em = new Employee(rs.getString(2), rs.getString(4), rs.getInt(1), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7));
+            }
             ps.close();
-            return e;
         } catch (SQLException e) {
             sqlError(e);
         }
 
-        return null;
+        return em;
     }
 
     public void addEmployee(Employee employee) {
@@ -561,7 +562,10 @@ public class DB {
 
     public ArrayList<ToDo> getToDos(Date date) {
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_ToDo");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_ToDo WHERE fld_TDDate=?");
+
+            java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.of(date.getYear() +1900, date.getMonth()+1, date.getDate()));
+            ps.setDate(1,sqlDate);
 
             ResultSet rs = ps.executeQuery();
 
@@ -664,15 +668,7 @@ public class DB {
     }
 
     public void deleteUser(User user) {
-        try {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM tbl_User WHERE fld_UserLogin = ?");
-            ps.setString(1, user.getLogin());
-
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException e) {
-            sqlError(e);
-        }
+        deleteUser(user.getLogin());
     }
 
     public void updateUser(User user) {
@@ -690,5 +686,16 @@ public class DB {
         }
     }
 
+    public void deleteUser(String username) {
+        try {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM tbl_User WHERE fld_UserLogin = ?");
+            ps.setString(1, username);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+    }
 }
 

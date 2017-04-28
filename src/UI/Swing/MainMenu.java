@@ -19,18 +19,20 @@ public class MainMenu {
     private JButton btDeletRoomRes;
     private JButton btUpdRoomRes;
 
-    public MainMenu(ReservationManager rm, UserManager um, Administration adm) {
-        btRoomReservation.addActionListener(Action -> new StandardReservationUI(rm, adm));
-        btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI(rm, adm));
-        btCateringReservation.addActionListener(Action -> new CateringReservationUI(rm, adm));
-        btCreateToDo.addActionListener(Action -> new ToDoUI(adm));
-        btUserAdmin.addActionListener(Action -> new UserAdminUI(adm));
+    private MainMenu(ReservationManager rm, Administration adm) {
+        btRoomReservation.addActionListener(Action -> StandardReservationUI.main(rm, adm));
+        btUpdRoomRes.addActionListener(Action -> UpdateRoomRes.main(rm,adm));
+        btDeletRoomRes.addActionListener(Action -> DeleteRoomRes.main(rm));
+        btArrangementReservation.addActionListener(Action ->  ArrangementReservationUI.main(rm, adm));
+        btCateringReservation.addActionListener(Action ->  CateringReservationUI.main(rm, adm));
+        btCreateToDo.addActionListener(Action ->  ToDoUI.main(adm));
+        btUserAdmin.addActionListener(Action ->  UserAdminUI.main(adm));
     }
 
-    public static void main(ReservationManager rm, UserManager um, Administration adm) {
+    public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Main Menu");
-        frame.setContentPane(new MainMenu(rm, um, adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setContentPane(new MainMenu(rm, adm).pnHolding);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

@@ -58,7 +58,7 @@ public class UserAdminUI {
     private JLabel lbCreateUserEmpId;
     private JButton btCreateEmp;
 
-    public UserAdminUI(Administration adm) {
+    private UserAdminUI(Administration adm) {
         btCreateUser.addActionListener(Action -> createUser(adm));
         btDeleteUser.addActionListener(Action -> deleteUser(adm));
         btUpdateUser.addActionListener(Action -> editUser(adm));
@@ -68,7 +68,7 @@ public class UserAdminUI {
     public static void main(Administration adm) {
         JFrame frame = new JFrame("User Administration");
         frame.setContentPane(new UserAdminUI(adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

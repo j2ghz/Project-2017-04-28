@@ -27,14 +27,14 @@ public class CateringReservationUI {
     private JTextField tfCateringID;
     private JLabel lbCateringID;
 
-    public CateringReservationUI(ReservationManager rm, Administration adm) {
+    private CateringReservationUI(ReservationManager rm, Administration adm) {
         btCreateReservation.addActionListener(Action -> createReservation(rm, adm));
     }
 
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Catering Reservation");
         frame.setContentPane(new CateringReservationUI(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

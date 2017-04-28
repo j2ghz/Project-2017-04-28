@@ -132,14 +132,14 @@ public class Administration {
     }
 
     public void createUser(User user) {
-        throw new NotImplementedException();
+        db.addUser(user);
     }
 
     public User getUser(String username, String password) {
-        throw new NotImplementedException();
+        return db.getUser(username);
     }
 
     public void deleteUser(User user) {
-        throw new NotImplementedException();
+        db.deleteUser(user);
     }
 }

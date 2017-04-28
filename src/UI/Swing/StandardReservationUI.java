@@ -62,14 +62,14 @@ public class StandardReservationUI {
     private JLabel lbResId;
     private JTextField tfResId;
 
-    public StandardReservationUI(ReservationManager rm, Administration adm) {
+    private StandardReservationUI(ReservationManager rm, Administration adm) {
         btCreateReservation.addActionListener(Action -> createReservation(rm, adm));
     }
 
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Room Reservation");
         frame.setContentPane(new StandardReservationUI(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
