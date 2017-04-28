@@ -3,10 +3,7 @@ package Services.Database;
 import Domain.Model.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -517,8 +514,22 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public User getUser(String user, String pass) {
-        throw new NotImplementedException();
+    public User getUser(String user) {
+        try {
+            ps = con.prepareStatement("SELECT * FROM tbl_User WHERE fld_UserLogin=?");
+
+            ps.setString(1,user);
+
+            ResultSet rs = ps.executeQuery();
+
+            Employee e = getEmployee(rs.getInt(4));
+            User u = new User(rs.getString(1),rs.getString(3),rs.getString(2),e);
+
+            ps.close();
+            return u;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
     }
 
     public void addUser(User user) {
