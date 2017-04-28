@@ -20,13 +20,13 @@ public class ReservationManager {
         throw new NotImplementedException();
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, int id) {
+    public void reserveRoom(int id, Date checkIn, Date checkOut, Customer customer, Room room) {
         RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         db.addRoomReservation(reservation);
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, Menu menu, int id) {
+    public void reserveRoom(int id, Date checkIn, Date checkOut, Customer customer, Room room, Menu menu) {
         RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         reservation.addMenu(menu);
@@ -34,7 +34,7 @@ public class ReservationManager {
         db.addRoomReservation(reservation);
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, RoomService rs, int id) {
+    public void reserveRoom(int id, Date checkIn, Date checkOut, Customer customer, Room room, RoomService rs) {
         RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         reservation.addRoomService(rs);
@@ -42,7 +42,7 @@ public class ReservationManager {
         db.addRoomReservation(reservation);
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, Menu menu, RoomService rs, int id) {
+    public void reserveRoom(int id, Date checkIn, Date checkOut, Customer customer, Room room, Menu menu, RoomService rs) {
         RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         reservation.addMenu(menu);
