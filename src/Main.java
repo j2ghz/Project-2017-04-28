@@ -1,4 +1,6 @@
+import Domain.Management.Administration;
 import Domain.Management.UserManager;
+import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
 import UI.Swing.LoginUI;
 
@@ -17,9 +19,11 @@ public class Main {
         }
         System.out.println("Connected");
 
-        UserManager userManager = new UserManager(db);
+        UserManager um = new UserManager(db);
+        ReservationManager rm = new ReservationManager(db);
+        Administration adm = new Administration(db);
 
-        LoginUI loginUI = new LoginUI(userManager, db);
+        LoginUI loginUI = new LoginUI(rm,um,adm);
         loginUI.setVisible(true);
 
 

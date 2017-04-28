@@ -29,7 +29,7 @@ public class MainMenu {
     }
 
     public MainMenu(ReservationManager rm, UserManager um, Administration adm){
-        btRoomReservation.addActionListener(Action -> new StandardReservationUI());
+        btRoomReservation.addActionListener(Action -> new StandardReservationUI(rm,adm));
         btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI());
         btCateringReservation.addActionListener(Action -> new CateringReservationUI());
         btCreateToDo.addActionListener(Action -> new ToDoUI());

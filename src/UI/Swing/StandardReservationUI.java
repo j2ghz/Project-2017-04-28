@@ -70,28 +70,25 @@ public class StandardReservationUI {
         frame.setVisible(true);
     }
 
-    public StandardReservationUI(DB db) {
-        btCreateReservation.addActionListener(Action -> createReservation(db));
+    public StandardReservationUI(ReservationManager rm, Administration adm) {
+        btCreateReservation.addActionListener(Action -> createReservation(rm,adm));
     }
 
-    private void createReservation(DB db) {
-        Administration admin = new Administration(db);
+    private void createReservation(ReservationManager rm, Administration adm) {
         JOptionPane jOptionPane = new JOptionPane(pnHolding);
         jOptionPane.setVisible(false);
 
         try {
-            admin.createCustomer(Integer.parseInt(tfCustID.getText()), tfCustPhone.getText(), tfCustAddress.getText(), tfCustEmail.getText(), new SimpleDateFormat().parse(tfCustBirth.getText()), tfCustName.getText(), jOptionPane);
+            adm.createCustomer(Integer.parseInt(tfCustID.getText()), tfCustPhone.getText(), tfCustAddress.getText(), tfCustEmail.getText(), new SimpleDateFormat().parse(tfCustBirth.getText()), tfCustName.getText(), jOptionPane);
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered birthdate was invalid, customer was not created.");
         }
 
-        admin.createRoom(Double.parseDouble(tfRoomPrice.getText()), tfRoomName.getText(), Integer.parseInt(tfRoomNumber.getText()), Integer.parseInt(tfSize.getText()),tfRoomDesc.getText(), jOptionPane);
+        adm.createRoom(Double.parseDouble(tfRoomPrice.getText()), tfRoomName.getText(), Integer.parseInt(tfRoomNumber.getText()), Integer.parseInt(tfSize.getText()),tfRoomDesc.getText(), jOptionPane);
 
-        Customer customer = admin.getCustomer(Integer.parseInt(tfCustID.getText()));
+        Customer customer = adm.getCustomer(Integer.parseInt(tfCustID.getText()));
 
-        Room room = admin.getRoom(Integer.parseInt(tfRoomNumber.getText()));
-
-        ReservationManager rm = new ReservationManager(db);
+        Room room = adm.getRoom(Integer.parseInt(tfRoomNumber.getText()));
 
         try {
             if (rbNoMenu.isSelected() && rbNoService.isSelected()) {
