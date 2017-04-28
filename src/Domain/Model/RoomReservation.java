@@ -13,6 +13,14 @@ public class RoomReservation {
     private int id;
 
 
+    public RoomReservation(Date checkIn, Date checkOut, Customer customer, Room room, int id) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.customer = customer;
+        this.room = room;
+        this.id = id;
+    }
+
     public Collection<Menu> getMenus() {
         return menus;
     }
@@ -25,12 +33,8 @@ public class RoomReservation {
         return roomServices;
     }
 
-    public RoomReservation(Date checkIn, Date checkOut, Customer customer, Room room, int id) {
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-        this.customer = customer;
-        this.room = room;
-        this.id = id;
+    public void setRoomServices(Collection<RoomService> roomServices) {
+        this.roomServices = roomServices;
     }
 
     public void addMenu(Menu menu) {
@@ -39,10 +43,6 @@ public class RoomReservation {
 
     public void addRoomService(RoomService rs) {
         roomServices.add(rs);
-    }
-
-    public void setRoomServices(Collection<RoomService> roomServices) {
-        this.roomServices = roomServices;
     }
 
     public Room getRoom() {

@@ -1,9 +1,10 @@
 package UI.Swing;
 
 import Domain.Management.Administration;
-import Domain.Model.*;
+import Domain.Model.Customer;
+import Domain.Model.Room;
+import Domain.Model.RoomReservation;
 import Domain.Reservation.ReservationManager;
-import Services.Database.DB;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
@@ -48,19 +49,19 @@ public class UpdateRoomRes {
     private JLabel lbResId;
 
 
-    public static void main(ReservationManager rm,Administration adm) {
+    public UpdateRoomRes(ReservationManager rm, Administration adm) {
+        btUpdateRes.addActionListener(Action -> updateReservation(rm, adm));
+    }
+
+    public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Update Room Reservation");
-        frame.setContentPane(new UpdateRoomRes(rm,adm).pnHolding);
+        frame.setContentPane(new UpdateRoomRes(rm, adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public UpdateRoomRes(ReservationManager rm,Administration adm) {
-        btUpdateRes.addActionListener(Action -> updateReservation(rm,adm));
-    }
-
-    private void updateReservation(ReservationManager rm,Administration adm) {
+    private void updateReservation(ReservationManager rm, Administration adm) {
         String custAddress = tfCustAddress.getText();
         String custName = lbCustName.getText();
         String custEmail = tfCustEmail.getText();
@@ -117,7 +118,7 @@ public class UpdateRoomRes {
 
 
         if (checkIn != null && checkOut != null && customer != null && room != null) {
-            RoomReservation roomRes = new RoomReservation(checkIn, checkOut, customer, room,Integer.parseInt(tfResId.getText()));
+            RoomReservation roomRes = new RoomReservation(checkIn, checkOut, customer, room, Integer.parseInt(tfResId.getText()));
 
             rm.updateRoomReservation(roomRes);
         } else {

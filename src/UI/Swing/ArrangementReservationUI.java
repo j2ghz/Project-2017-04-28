@@ -27,16 +27,16 @@ public class ArrangementReservationUI {
     private JTextField tfEventID;
     private JLabel lbEventID;
 
+    public ArrangementReservationUI(ReservationManager rm, Administration adm) {
+        btCreateReservation.addActionListener(Action -> createReservation(rm, adm));
+    }
+
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Arrangement Reservation");
-        frame.setContentPane(new ArrangementReservationUI(rm,adm).pnHolding);
+        frame.setContentPane(new ArrangementReservationUI(rm, adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public ArrangementReservationUI(ReservationManager rm, Administration adm) {
-        btCreateReservation.addActionListener(Action -> createReservation(rm,adm));
     }
 
     private void createReservation(ReservationManager rm, Administration adm) {

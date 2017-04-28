@@ -3,8 +3,6 @@ package UI.Swing;
 import Domain.Management.Administration;
 import Domain.Model.Employee;
 import Domain.Model.User;
-import Services.Database.DB;
-import com.sun.xml.internal.bind.v2.TODO;
 
 import javax.swing.*;
 
@@ -60,19 +58,19 @@ public class UserAdminUI {
     private JLabel lbCreateUserEmpId;
     private JButton btCreateEmp;
 
+    public UserAdminUI(Administration adm) {
+        btCreateUser.addActionListener(Action -> createUser(adm));
+        btDeleteUser.addActionListener(Action -> deleteUser(adm));
+        btUpdateUser.addActionListener(Action -> editUser(adm));
+        btCreateEmp.addActionListener(Action -> createEmp(adm));
+    }
+
     public static void main(Administration adm) {
         JFrame frame = new JFrame("User Administration");
         frame.setContentPane(new UserAdminUI(adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public UserAdminUI(Administration adm) {
-        btCreateUser.addActionListener(Action -> createUser(adm));
-        btDeleteUser.addActionListener(Action -> deleteUser(adm));
-        btUpdateUser.addActionListener(Action -> editUser(adm));
-        btCreateEmp.addActionListener(Action -> createEmp(adm));
     }
 
     private void createUser(Administration adm) {
@@ -130,7 +128,7 @@ public class UserAdminUI {
         JOptionPane.showConfirmDialog(pnHolding, confirmation);
     }
 
-    private void createEmp(Administration adm){
+    private void createEmp(Administration adm) {
 
         String empName = tfName.getText();
         String position = tfPosition.getText();
@@ -142,8 +140,8 @@ public class UserAdminUI {
 
         Employee employee = null;
 
-        if(empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null){
-            employee = new Employee(empName,position,id,phone,address,email,bank);
+        if (empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null) {
+            employee = new Employee(empName, position, id, phone, address, email, bank);
             adm.createEmployee(employee);
         }
     }

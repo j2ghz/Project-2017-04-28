@@ -92,7 +92,7 @@ public class Administration {
 
     public void createRoom(double price, String name, int number, int bedCount, String description, JOptionPane jOptionPane) {
         if (price != 0 && name != null && number != 0 && bedCount != 0) {
-            Room room = new Room(price, name, number, bedCount,description);
+            Room room = new Room(price, name, number, bedCount, description);
             db.addRoom(room);
         } else {
             jOptionPane.setMessage("There was some information about the room missing, reservation was not created.");
@@ -135,9 +135,11 @@ public class Administration {
         throw new NotImplementedException();
     }
 
-    public User getUser(String username, String password) {throw new NotImplementedException();
+    public User getUser(String username, String password) {
+        throw new NotImplementedException();
     }
 
-    public void deleteUser(User user) {throw new NotImplementedException();
+    public void deleteUser(User user) {
+        throw new NotImplementedException();
     }
 }

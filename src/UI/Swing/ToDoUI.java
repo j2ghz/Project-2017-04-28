@@ -2,7 +2,6 @@ package UI.Swing;
 
 import Domain.Management.Administration;
 import Domain.Model.ToDo;
-import Services.Database.DB;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
@@ -19,16 +18,16 @@ public class ToDoUI {
     private JTextField tfToDo;
     private JLabel lbToDo;
 
+    public ToDoUI(Administration adm) {
+        btGenerateToDo.addActionListener(Action -> generateToDo(adm));
+    }
+
     public static void main(Administration adm) {
         JFrame frame = new JFrame("To-Do");
         frame.setContentPane(new ToDoUI(adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public ToDoUI(Administration adm) {
-        btGenerateToDo.addActionListener(Action -> generateToDo(adm));
     }
 
     private void generateToDo(Administration adm) {

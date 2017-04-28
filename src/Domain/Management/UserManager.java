@@ -3,8 +3,6 @@ package Domain.Management;
 import Domain.Model.User;
 import Services.Database.DB;
 
-import java.text.DateFormat;
-
 
 public class UserManager {
     public User currentUser = null;

@@ -1,7 +1,6 @@
 package UI.Swing;
 
 import Domain.Reservation.ReservationManager;
-import Services.Database.DB;
 
 import javax.swing.*;
 
@@ -27,7 +26,7 @@ public class DeleteRoomRes {
         frame.setVisible(true);
     }
 
-    private void deleteRoomRes(ReservationManager rm){
+    private void deleteRoomRes(ReservationManager rm) {
         rm.deleteRoomReservation(Integer.parseInt(tfResId.getText()));
     }
 }

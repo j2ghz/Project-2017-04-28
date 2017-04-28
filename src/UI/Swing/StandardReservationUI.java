@@ -1,7 +1,10 @@
 package UI.Swing;
 
 import Domain.Management.Administration;
-import Domain.Model.*;
+import Domain.Model.Customer;
+import Domain.Model.Menu;
+import Domain.Model.Room;
+import Domain.Model.RoomService;
 import Domain.Reservation.ReservationManager;
 
 import javax.swing.*;
@@ -59,16 +62,16 @@ public class StandardReservationUI {
     private JLabel lbResId;
     private JTextField tfResId;
 
+    public StandardReservationUI(ReservationManager rm, Administration adm) {
+        btCreateReservation.addActionListener(Action -> createReservation(rm, adm));
+    }
+
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Room Reservation");
-        frame.setContentPane(new StandardReservationUI(rm,adm).pnHolding);
+        frame.setContentPane(new StandardReservationUI(rm, adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public StandardReservationUI(ReservationManager rm, Administration adm) {
-        btCreateReservation.addActionListener(Action -> createReservation(rm,adm));
     }
 
     private void createReservation(ReservationManager rm, Administration adm) {
@@ -81,7 +84,7 @@ public class StandardReservationUI {
             JOptionPane.showConfirmDialog(pnHolding, "The entered birthdate was invalid, customer was not created.");
         }
 
-        adm.createRoom(Double.parseDouble(tfRoomPrice.getText()), tfRoomName.getText(), Integer.parseInt(tfRoomNumber.getText()), Integer.parseInt(tfSize.getText()),tfRoomDesc.getText(), jOptionPane);
+        adm.createRoom(Double.parseDouble(tfRoomPrice.getText()), tfRoomName.getText(), Integer.parseInt(tfRoomNumber.getText()), Integer.parseInt(tfSize.getText()), tfRoomDesc.getText(), jOptionPane);
 
         Customer customer = adm.getCustomer(Integer.parseInt(tfCustID.getText()));
 
@@ -92,17 +95,17 @@ public class StandardReservationUI {
             if (rbNoMenu.isSelected() && rbNoService.isSelected()) {
                 rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room);
             } else if (rbNoService.isSelected() && rbYesMenu.isSelected()) {
-                Menu menu = new Menu(Double.parseDouble(tfMenuPrice.getText()),tfMenuName.getText());
+                Menu menu = new Menu(Double.parseDouble(tfMenuPrice.getText()), tfMenuName.getText());
                 adm.createMenu(menu);
                 rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room, menu);
-            }else if (rbYesService.isSelected() && rbNoMenu.isSelected()){
-                RoomService rs = new RoomService(Double.parseDouble(tfServicePrice.getText()),tfServiceName.getText());
+            } else if (rbYesService.isSelected() && rbNoMenu.isSelected()) {
+                RoomService rs = new RoomService(Double.parseDouble(tfServicePrice.getText()), tfServiceName.getText());
                 adm.createRoomService(rs);
                 rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room, rs);
-            } else if(rbYesService.isSelected() && rbYesMenu.isSelected()){
-                Menu menu = new Menu(Double.parseDouble(tfMenuPrice.getText()),tfMenuName.getText());
+            } else if (rbYesService.isSelected() && rbYesMenu.isSelected()) {
+                Menu menu = new Menu(Double.parseDouble(tfMenuPrice.getText()), tfMenuName.getText());
                 adm.createMenu(menu);
-                RoomService rs = new RoomService(Double.parseDouble(tfServicePrice.getText()),tfServiceName.getText());
+                RoomService rs = new RoomService(Double.parseDouble(tfServicePrice.getText()), tfServiceName.getText());
                 adm.createRoomService(rs);
                 rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room, menu, rs);
 
