@@ -18,15 +18,12 @@ public class Main {
             return;
         }
         System.out.println("Connected");
-
+        System.out.println("Creating Managers");
         UserManager um = new UserManager(db);
         ReservationManager rm = new ReservationManager(db);
         Administration adm = new Administration(db);
-
+        System.out.println("Starting login");
         LoginUI.main(rm, um, adm);
-
-
-        //if login bad exit
-
+        System.out.println("Goodbye");
     }
 }

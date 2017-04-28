@@ -5,8 +5,8 @@ import Services.Database.DB;
 
 
 public class UserManager {
+    private final DB db;
     public User currentUser = null;
-    private DB db;
 
     public UserManager(DB db) {
         this.db = db;

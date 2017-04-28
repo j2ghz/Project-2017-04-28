@@ -25,7 +25,7 @@ public class ToDoUI {
     public static void main(Administration adm) {
         JFrame frame = new JFrame("To-Do");
         frame.setContentPane(new ToDoUI(adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
@@ -40,17 +40,17 @@ public class ToDoUI {
 
         ArrayList<ToDo> toDo = adm.getToDos(date);
 
-        String toDoString = "";
+        StringBuilder toDoString = new StringBuilder();
 
         for (int i = 0; i < toDo.size(); i++) {
-            toDoString += toDo.get(i).getEmployee().getName() + "\n";
-            toDoString += toDo.get(i).getDescription();
+            toDoString.append(toDo.get(i).getEmployee().getName()).append("\n");
+            toDoString.append(toDo.get(i).getDescription());
             if (i + 1 != toDo.size()) {
-                toDoString += "\n\n\n";
+                toDoString.append("\n\n\n");
             }
         }
 
-        taToDo.setText(toDoString);
+        taToDo.setText(toDoString.toString());
     }
 
 

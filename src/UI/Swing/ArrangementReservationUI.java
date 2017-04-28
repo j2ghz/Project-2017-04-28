@@ -34,7 +34,7 @@ public class ArrangementReservationUI {
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Arrangement Reservation");
         frame.setContentPane(new ArrangementReservationUI(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

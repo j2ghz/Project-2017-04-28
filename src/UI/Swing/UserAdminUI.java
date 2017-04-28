@@ -68,7 +68,7 @@ public class UserAdminUI {
     public static void main(Administration adm) {
         JFrame frame = new JFrame("User Administration");
         frame.setContentPane(new UserAdminUI(adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
@@ -109,9 +109,10 @@ public class UserAdminUI {
             user = adm.getUser(username, password);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some current user information missing, user not found.");
+            return;
         }
 
-        String confirmation = null;
+        String confirmation = "";
         if (tfUsernameNew.getText() != null) {
             user.setLogin(tfUsernameNew.getText());
             confirmation += "Username edited. ";
@@ -138,11 +139,8 @@ public class UserAdminUI {
         String email = tfEmail.getText();
         String bank = tfBank.getText();
 
-        Employee employee = null;
-
         if (empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null) {
-            employee = new Employee(empName, position, id, phone, address, email, bank);
-            adm.createEmployee(employee);
+            adm.createEmployee(new Employee(empName, position, id, phone, address, email, bank));
         }
     }
 }

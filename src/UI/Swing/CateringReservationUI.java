@@ -34,7 +34,7 @@ public class CateringReservationUI {
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Catering Reservation");
         frame.setContentPane(new CateringReservationUI(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

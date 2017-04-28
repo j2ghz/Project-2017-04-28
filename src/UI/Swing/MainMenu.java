@@ -30,7 +30,7 @@ public class MainMenu {
     public static void main(ReservationManager rm, UserManager um, Administration adm) {
         JFrame frame = new JFrame("Main Menu");
         frame.setContentPane(new MainMenu(rm, um, adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

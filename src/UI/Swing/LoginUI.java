@@ -24,7 +24,7 @@ public class LoginUI extends JFrame {
     public static void main(ReservationManager rm, UserManager um, Administration adm) {
         JFrame frame = new JFrame("Login");
         frame.setContentPane(new LoginUI(rm, um, adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

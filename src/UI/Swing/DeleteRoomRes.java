@@ -21,7 +21,7 @@ public class DeleteRoomRes {
 
         JFrame frame = new JFrame("Delete Room Reservation");
         frame.setContentPane(new DeleteRoomRes(rm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

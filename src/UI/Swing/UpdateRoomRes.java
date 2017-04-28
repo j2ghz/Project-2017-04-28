@@ -56,7 +56,7 @@ public class UpdateRoomRes {
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Update Room Reservation");
         frame.setContentPane(new UpdateRoomRes(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }

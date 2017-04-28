@@ -69,7 +69,7 @@ public class StandardReservationUI {
     public static void main(ReservationManager rm, Administration adm) {
         JFrame frame = new JFrame("Room Reservation");
         frame.setContentPane(new StandardReservationUI(rm, adm).pnHolding);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
