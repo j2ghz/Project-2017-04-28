@@ -8,6 +8,12 @@ public class ToDo {
     private Date date;
     private Employee employee;
 
+    public ToDo(String description, Date date, Employee employee) {
+        this.description = description;
+        this.date = date;
+        this.employee = employee;
+    }
+
     public Employee getEmployee() {
         return employee;
     }

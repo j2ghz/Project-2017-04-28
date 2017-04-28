@@ -69,7 +69,7 @@ public class ReservationManager {
 
     public void createArrangementReservation(Date date, int arrangementID, double price, int customerID, String arrangementName, String description, Customer customer, int eventSize, JOptionPane jOptionPane) {
         if (date != null && arrangementID != 0 && price != 0 && customerID != 0 && arrangementName != null && description != null && customer != null && eventSize != 0) {
-            Arrangement arrangement = new Arrangement(date, arrangementID, price, customerID, arrangementName, description, customer, eventSize);
+            Arrangement arrangement = new Arrangement(date, arrangementID, price, arrangementName, description, customer, eventSize);
             db.addArrangement(arrangement);
         } else {
             jOptionPane.setMessage("There was some information missing, reservation was not created");
