@@ -5,12 +5,15 @@ public class Room {
     private String name;
     private int number;
     private int bedCount;
+    private String description;
 
-    public Room(double price, String name, int number, int bedCount) {
+
+    public Room(double price, String name, int number, int bedCount, String description) {
         this.price = price;
         this.name = name;
         this.number = number;
         this.bedCount = bedCount;
+        this.description = description;
     }
 
     public double getPrice() {
@@ -43,5 +46,13 @@ public class Room {
 
     public void setBedCount(int bedCount) {
         this.bedCount = bedCount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

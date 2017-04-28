@@ -5,11 +5,13 @@ import java.util.Date;
 
 public class RoomReservation {
     private Date checkIn;
-    private Date chekcOut;
+    private Date checkOut;
     private Customer customer;
     private Collection<Menu> menus;
     private Collection<RoomService> roomServices;
     private Room room;
+    private int id;
+
 
     public Collection<Menu> getMenus() {
         return menus;
@@ -23,11 +25,12 @@ public class RoomReservation {
         return roomServices;
     }
 
-    public RoomReservation(Date checkIn, Date chekcOut, Customer customer, Room room) {
+    public RoomReservation(Date checkIn, Date checkOut, Customer customer, Room room, int id) {
         this.checkIn = checkIn;
-        this.chekcOut = chekcOut;
+        this.checkOut = checkOut;
         this.customer = customer;
         this.room = room;
+        this.id = id;
     }
 
     public void addMenu(Menu menu) {
@@ -66,11 +69,19 @@ public class RoomReservation {
         this.checkIn = checkIn;
     }
 
-    public Date getChekcOut() {
-        return chekcOut;
+    public Date getCheckOut() {
+        return checkOut;
     }
 
-    public void setChekcOut(Date chekcOut) {
-        this.chekcOut = chekcOut;
+    public void setCheckOut(Date checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -79,4 +79,11 @@ public class Arrangement {
         this.description = description;
     }
 
+    public int getParticipantNo() {
+        return participantNo;
+    }
+
+    public void setParticipantNo(int participantNo) {
+        this.participantNo = participantNo;
+    }
 }
