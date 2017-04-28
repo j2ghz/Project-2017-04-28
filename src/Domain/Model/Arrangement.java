@@ -6,17 +6,15 @@ public class Arrangement {
     private Date date;
     private int id;
     private double price;
-    private int customerId;
     private int participantNo;
     private String name;
     private String description;
     private Customer customer;
 
-    public Arrangement(Date date, int id, double price, int customerId, String name, String description, Customer customer, int participantNo) {
+    public Arrangement(Date date, int id, double price, String name, String description, Customer customer, int participantNo) {
         this.date = date;
         this.id = id;
         this.price = price;
-        this.customerId = customerId;
         this.participantNo = participantNo;
         this.name = name;
         this.description = description;
@@ -53,14 +51,6 @@ public class Arrangement {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public String getName() {
