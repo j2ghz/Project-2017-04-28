@@ -214,7 +214,7 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public Employee getEmployee(/*identifier*/) {
+    public Employee getEmployee(/*identifier*/int i) {
         throw new NotImplementedException();
     }
 
@@ -367,7 +367,7 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public RoomReservation getRoomReservation(/*identifier*/) {
+    public RoomReservation getRoomReservation(/*identifier*/int resId) {
         throw new NotImplementedException();
     }
 

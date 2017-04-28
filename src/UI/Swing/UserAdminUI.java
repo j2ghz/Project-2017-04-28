@@ -1,5 +1,6 @@
 package UI.Swing;
 
+import Domain.Management.Administration;
 import Domain.Model.Employee;
 import Domain.Model.User;
 import Services.Database.DB;
@@ -59,55 +60,55 @@ public class UserAdminUI {
     private JLabel lbCreateUserEmpId;
     private JButton btCreateEmp;
 
-    public static void main(DB db) {
+    public static void main(Administration adm) {
         JFrame frame = new JFrame("User Administration");
-        frame.setContentPane(new UserAdminUI(db).pnHolding);
+        frame.setContentPane(new UserAdminUI(adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public UserAdminUI(DB db) {
-        btCreateUser.addActionListener(Action -> createUser(db));
-        btDeleteUser.addActionListener(Action -> deleteUser(db));
-        btUpdateUser.addActionListener(Action -> editUser(db));
-        btCreateEmp.addActionListener(Action -> createEmp(db));
+    public UserAdminUI(Administration adm) {
+        btCreateUser.addActionListener(Action -> createUser(adm));
+        btDeleteUser.addActionListener(Action -> deleteUser(adm));
+        btUpdateUser.addActionListener(Action -> editUser(adm));
+        btCreateEmp.addActionListener(Action -> createEmp(adm));
     }
 
-    private void createUser(DB db) {
+    private void createUser(Administration adm) {
         String username = tfUsernameCreate.getText();
         String password = tfPasswordCreate.getText();
         String group = tfGroupCreate.getText();
 
-        Employee employee = db.getEmployee(Integer.parseInt(tfCreateUserEmpId.getText()));
+        Employee employee = adm.getEmployee(Integer.parseInt(tfCreateUserEmpId.getText()));
 
         if (username != null && password != null && group != null && employee != null) {
             User user = new User(username, password, group, employee);
-            db.addUser(user);
+            adm.createUser(user);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, user not created.");
         }
     }
 
-    private void deleteUser(DB db) {
+    private void deleteUser(Administration adm) {
         String username = tfUsernameDelete.getText();
         String password = tfPasswordDelete.getText();
 
         if (username != null && password != null) {
-            db.deleteUser(db.getUser(username, password));
+            adm.deleteUser(adm.getUser(username, password));
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information missing, user not deleted.");
         }
     }
 
-    private void editUser(DB db) {
+    private void editUser(Administration adm) {
         String username = tfUsernameCurrent.getText();
         String password = tfPasswordCurrent.getText();
 
         User user = null;
 
         if (username != null && password != null) {
-            user = db.getUser(username, password);
+            user = adm.getUser(username, password);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some current user information missing, user not found.");
         }
@@ -129,7 +130,7 @@ public class UserAdminUI {
         JOptionPane.showConfirmDialog(pnHolding, confirmation);
     }
 
-    private void createEmp(DB db){
+    private void createEmp(Administration adm){
 
         String empName = tfName.getText();
         String position = tfPosition.getText();
@@ -143,7 +144,7 @@ public class UserAdminUI {
 
         if(empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null){
             employee = new Employee(empName,position,id,phone,address,email,bank);
-            db.addEmployee(employee);
+            adm.createEmployee(employee);
         }
     }
 }

@@ -1,6 +1,8 @@
 package UI.Swing;
 
+import Domain.Management.Administration;
 import Domain.Model.*;
+import Domain.Reservation.ReservationManager;
 import Services.Database.DB;
 
 import javax.swing.*;
@@ -46,19 +48,19 @@ public class UpdateRoomRes {
     private JLabel lbResId;
 
 
-    public static void main(DB db) {
+    public static void main(ReservationManager rm,Administration adm) {
         JFrame frame = new JFrame("Update Room Reservation");
-        frame.setContentPane(new UpdateRoomRes(db).pnHolding);
+        frame.setContentPane(new UpdateRoomRes(rm,adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public UpdateRoomRes(DB db) {
-        btUpdateRes.addActionListener(Action -> updateReservation(db));
+    public UpdateRoomRes(ReservationManager rm,Administration adm) {
+        btUpdateRes.addActionListener(Action -> updateReservation(rm,adm));
     }
 
-    private void updateReservation(DB db) {
+    private void updateReservation(ReservationManager rm,Administration adm) {
         String custAddress = tfCustAddress.getText();
         String custName = lbCustName.getText();
         String custEmail = tfCustEmail.getText();
@@ -74,15 +76,16 @@ public class UpdateRoomRes {
 
         if (custAddress != null && custName != null && custEmail != null && custPhone != null && custBirth != null) {
             Customer customer = new Customer(custID, custPhone, custAddress, custEmail, custBirth, custName);
-            db.updateCustomer(customer);
-            updateRoom(db, customer);
+
+            adm.updateCustomer(customer);
+            updateRoom(rm, customer);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information about the customer missing, reservation was not updated.");
         }
 
     }
 
-    private void updateRoom(DB db, Customer customer) {
+    private void updateRoom(ReservationManager rm, Customer customer) {
         double price = Double.parseDouble(tfRoomPrice.getText());
         String name = tfRoomName.getText();
         int roomNumber = Integer.parseInt(tfRoomNumber.getText());
@@ -91,14 +94,14 @@ public class UpdateRoomRes {
 
         if (price != 0 && name != null && roomNumber != 0 && roomSize != 0) {
             Room room = new Room(price, name, roomNumber, roomSize, roomDesc);
-            updateRoomReservation(db, room, customer);
+            updateRoomReservation(rm, room, customer);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information about the room missing, reservation was not updated.");
         }
 
     }
 
-    private void updateRoomReservation(DB db, Room room, Customer customer) {
+    private void updateRoomReservation(ReservationManager rm, Room room, Customer customer) {
         Date checkIn = null;
         try {
             checkIn = new SimpleDateFormat().parse(tfCheckin.getText());
@@ -114,9 +117,9 @@ public class UpdateRoomRes {
 
 
         if (checkIn != null && checkOut != null && customer != null && room != null) {
-            RoomReservation roomRes = new RoomReservation(checkIn, checkOut, customer, room);
+            RoomReservation roomRes = new RoomReservation(checkIn, checkOut, customer, room,Integer.parseInt(tfResId.getText()));
 
-            db.updateRoomReservation(roomRes);
+            rm.updateRoomReservation(roomRes);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "The entered information was not valid, reservation not updated.");
         }

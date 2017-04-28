@@ -77,4 +77,8 @@ public class ReservationManager {
             jOptionPane.setVisible(true);
         }
     }
+
+    public void updateRoomReservation(RoomReservation roomRes) {
+        throw new NotImplementedException();
+    }
 }

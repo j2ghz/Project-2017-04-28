@@ -3,7 +3,6 @@ package Domain.Management;
 
 import Domain.Model.*;
 import Services.Database.DB;
-import jdk.nashorn.internal.scripts.JO;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
@@ -21,7 +20,7 @@ public class Administration {
         return db.getEmployees();
     }
 
-    public Employee getEmployee(/*identifier*/) {
+    public Employee getEmployee(/*identifier*/int i) {
         throw new NotImplementedException();
     }
 
@@ -59,7 +58,7 @@ public class Administration {
         throw new NotImplementedException();
     }
 
-    public void updateCustomer() {
+    public void updateCustomer(Customer customer) {
         throw new NotImplementedException();
     }
 
@@ -71,8 +70,8 @@ public class Administration {
         throw new NotImplementedException();
     }
 
-    public void createMenu(/*props*/) {
-        throw new NotImplementedException();
+    public void createMenu(Menu menu) {
+        db.addMenu(menu);
     }
 
     public void deleteMenu(Menu menu) {
@@ -116,8 +115,8 @@ public class Administration {
         throw new NotImplementedException();
     }
 
-    public void createRoomService(/*props*/) {
-        throw new NotImplementedException();
+    public void createRoomService(RoomService rs) {
+        db.addRoomService(rs);
     }
 
     public void deleteRoomService(RoomService roomService) {
@@ -126,5 +125,19 @@ public class Administration {
 
     public void updateRoomService() {
         throw new NotImplementedException();
+    }
+
+    public ArrayList<ToDo> getToDos(Date date) {
+        throw new NotImplementedException();
+    }
+
+    public void createUser(User user) {
+        throw new NotImplementedException();
+    }
+
+    public User getUser(String username, String password) {throw new NotImplementedException();
+    }
+
+    public void deleteUser(User user) {throw new NotImplementedException();
     }
 }

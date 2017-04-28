@@ -29,10 +29,10 @@ public class MainMenu {
     }
 
     public MainMenu(ReservationManager rm, UserManager um, Administration adm){
-        btRoomReservation.addActionListener(Action -> new StandardReservationUI());
-        btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI());
-        btCateringReservation.addActionListener(Action -> new CateringReservationUI());
-        btCreateToDo.addActionListener(Action -> new ToDoUI());
-        btUserAdmin.addActionListener(Action -> new UserAdminUI());
+        btRoomReservation.addActionListener(Action -> new StandardReservationUI(rm,adm));
+        btArrangementReservation.addActionListener(Action -> new ArrangementReservationUI(rm,adm));
+        btCateringReservation.addActionListener(Action -> new CateringReservationUI(rm,adm));
+        btCreateToDo.addActionListener(Action -> new ToDoUI(adm));
+        btUserAdmin.addActionListener(Action -> new UserAdminUI(adm));
     }
 }

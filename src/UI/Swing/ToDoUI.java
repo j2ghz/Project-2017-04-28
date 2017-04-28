@@ -1,5 +1,6 @@
 package UI.Swing;
 
+import Domain.Management.Administration;
 import Domain.Model.ToDo;
 import Services.Database.DB;
 
@@ -18,19 +19,19 @@ public class ToDoUI {
     private JTextField tfToDo;
     private JLabel lbToDo;
 
-    public static void main(DB db) {
+    public static void main(Administration adm) {
         JFrame frame = new JFrame("To-Do");
-        frame.setContentPane(new ToDoUI(db).pnHolding);
+        frame.setContentPane(new ToDoUI(adm).pnHolding);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public ToDoUI(DB db) {
-        btGenerateToDo.addActionListener(Action -> generateToDo(db));
+    public ToDoUI(Administration adm) {
+        btGenerateToDo.addActionListener(Action -> generateToDo(adm));
     }
 
-    private void generateToDo(DB db) {
+    private void generateToDo(Administration adm) {
         Date date = null;
         try {
             date = new SimpleDateFormat().parse(tfToDo.getText());
@@ -38,7 +39,7 @@ public class ToDoUI {
             JOptionPane.showConfirmDialog(pnHolding, "The entered check out was invalid, reservation was not created.");
         }
 
-        ArrayList<ToDo> toDo = db.getToDos(date);
+        ArrayList<ToDo> toDo = adm.getToDos(date);
 
         String toDoString = "";
 
