@@ -354,7 +354,7 @@ public class DB {
 
             ResultSet rs = ps.executeQuery();
 
-            Room r = new Room(rs.getDouble(4),rs.getString(5), rs.getInt(1), rs.getInt(3), rs.getString(2));
+            Room r = new Room(rs.getDouble(4), rs.getString(5), rs.getInt(1), rs.getInt(3), rs.getString(2));
 
             ps.close();
             return r;
@@ -411,23 +411,24 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public RoomReservation getRoomReservation(int id) {try {
-        ps = con.prepareStatement("SELECT * FROM tbl_RoomReservation WHERE fld_RRID=?");
+    public RoomReservation getRoomReservation(int id) {
+        try {
+            ps = con.prepareStatement("SELECT * FROM tbl_RoomReservation WHERE fld_RRID=?");
 
-        ps.setString(1, Integer.toString(id));
+            ps.setString(1, Integer.toString(id));
 
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        Customer c = getCustomer(rs.getInt(5));
-        Room r = getRoom(rs.getInt(4));
+            Customer c = getCustomer(rs.getInt(5));
+            Room r = getRoom(rs.getInt(4));
 
-        RoomReservation rr = new RoomReservation(rs.getDate(2), rs.getDate(3), c, r, rs.getInt(1));
+            RoomReservation rr = new RoomReservation(rs.getDate(2), rs.getDate(3), c, r, rs.getInt(1));
 
-        ps.close();
-        return rr;
-    } catch (SQLException e) {
-        sqlError(e);
-    }
+            ps.close();
+            return rr;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
 
         return null;
     }
