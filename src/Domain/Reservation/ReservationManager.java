@@ -3,7 +3,6 @@ package Domain.Reservation;
 
 import Domain.Model.*;
 import Services.Database.DB;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class ReservationManager {
     }
 
     public ArrayList<Room> freeRooms(Date date) {
-        throw new NotImplementedException();
+        return db.getRooms();
     }
 
     public void reserveRoom(int id, Date checkIn, Date checkOut, Customer customer, Room room) {
@@ -79,6 +78,6 @@ public class ReservationManager {
     }
 
     public void updateRoomReservation(RoomReservation roomRes) {
-        throw new NotImplementedException();
+        db.updateRoomReservation(roomRes);
     }
 }

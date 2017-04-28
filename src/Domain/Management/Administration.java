@@ -21,7 +21,7 @@ public class Administration {
     }
 
     public Employee getEmployee(/*identifier*/int i) {
-        throw new NotImplementedException();
+        return db.getEmployee(i);
     }
 
     public void createEmployee(Employee employee) {
@@ -41,7 +41,7 @@ public class Administration {
     }
 
     public Customer getCustomer(int id) {
-        throw new NotImplementedException();
+        return db.getCustomer(id);
     }
 
     public void createCustomer(int id, String phoneNumber, String address, String email, Date dateOfBirth, String name, JOptionPane jOptionPane) {
@@ -59,7 +59,7 @@ public class Administration {
     }
 
     public void updateCustomer(Customer customer) {
-        throw new NotImplementedException();
+        db.updateCustomer(customer);
     }
 
     public ArrayList<Menu> getMenus() {
@@ -87,7 +87,7 @@ public class Administration {
     }
 
     public Room getRoom(int number) {
-        throw new NotImplementedException();
+        return db.getRoom(number);
     }
 
     public void createRoom(double price, String name, int number, int bedCount, String description, JOptionPane jOptionPane) {
@@ -128,7 +128,7 @@ public class Administration {
     }
 
     public ArrayList<ToDo> getToDos(Date date) {
-        throw new NotImplementedException();
+        return db.getToDos(date);
     }
 
     public void createUser(User user) {

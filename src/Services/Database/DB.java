@@ -313,7 +313,7 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public Room getRoom(/*identifier*/) {
+    public Room getRoom(/*identifier*/int number) {
         throw new NotImplementedException();
     }
 
