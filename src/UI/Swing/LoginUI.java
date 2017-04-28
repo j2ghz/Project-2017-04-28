@@ -31,6 +31,7 @@ public class LoginUI extends JFrame {
 
     public void authenticate(ReservationManager rm, UserManager um, Administration adm) {
         if (um.login(tfUsername.getText(), tfPassword.getText())) {
+            JOptionPane.showConfirmDialog(pnHolding, "Success!");
             MainMenu.main(rm, adm);
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "Login failed, wrong username or password.");

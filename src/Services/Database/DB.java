@@ -21,6 +21,10 @@ public class DB {
 
     }
 
+    public static java.sql.Date convertDate(java.util.Date date) {
+        return java.sql.Date.valueOf(LocalDate.of(date.getYear() + 1900, date.getMonth() + 1, date.getDate()));
+    }
+
     public void sqlError(SQLException e) {
         e.printStackTrace();
         System.exit(1);
@@ -42,7 +46,7 @@ public class DB {
             ps.setInt(1, arrangement.getId());
             ps.setString(2, arrangement.getName());
             ps.setString(3, arrangement.getDescription());
-            ps.setString(4, arrangement.getDate().toString());
+            ps.setDate(4, convertDate(arrangement.getDate()));
             ps.setDouble(5, arrangement.getPrice());
             ps.setInt(6, arrangement.getParticipantNo());
             ps.setInt(7, arrangement.getCustomer().getId());
@@ -73,7 +77,7 @@ public class DB {
             PreparedStatement ps = con.prepareStatement("UPDATE tbl_Arrangement SET fld_ArrName = ? ,SET fld_ArrDescription = ?,SET fld_ArrDate = ?,SET fld_ArrPrice = ?,SET fld_ArrPartNo = ?,SET fld_CustID = ? WHERE fld_ArrID = ?");
             ps.setString(1, arrangement.getName());
             ps.setString(2, arrangement.getDescription());
-            ps.setString(3, arrangement.getDate().toString());
+            ps.setDate(3, convertDate(arrangement.getDate()));
             ps.setDouble(4, arrangement.getPrice());
             ps.setInt(5, arrangement.getParticipantNo());
             ps.setInt(6, arrangement.getCustomer().getId());
@@ -100,11 +104,11 @@ public class DB {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO tbl_Catering VALUES (?,?,?,?,?,?,?)");
 
-            ps.setInt(1, catering.getId());
-            ps.setInt(2, catering.getNumberOfMeals());
-            ps.setString(3, catering.getFoodType());
-            ps.setString(4, catering.getLocation());
-            ps.setString(5, catering.getDate().toString());
+            ps.setInt(5, catering.getId());
+            ps.setInt(1, catering.getNumberOfMeals());
+            ps.setString(2, catering.getFoodType());
+            ps.setString(3, catering.getLocation());
+            ps.setDate(4, convertDate(catering.getDate()));
             ps.setDouble(6, catering.getPrice());
             ps.setInt(7, catering.getCustomer().getId());
 
@@ -136,7 +140,7 @@ public class DB {
             ps.setInt(1, catering.getNumberOfMeals());
             ps.setString(2, catering.getFoodType());
             ps.setString(3, catering.getLocation());
-            ps.setString(4, catering.getDate().toString());
+            ps.setDate(4, convertDate(catering.getDate()));
             ps.setDouble(5, catering.getPrice());
             ps.setInt(6, catering.getCustomer().getId());
             ps.setInt(7, catering.getId());
@@ -154,22 +158,22 @@ public class DB {
     }
 
     public Customer getCustomer(int id) {
+        Customer c = null;
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Customer WHERE fld_CustID=?");
 
             ps.setString(1, Integer.toString(id));
 
             ResultSet rs = ps.executeQuery();
-
-            Customer c = new Customer(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(6), rs.getDate(5), rs.getString(2));
-
+            if (rs.next()) {
+                c = new Customer(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(6), rs.getDate(5), rs.getString(2));
+            }
             ps.close();
-            return c;
         } catch (SQLException e) {
             sqlError(e);
         }
 
-        return null;
+        return c;
     }
 
     public void addCustomer(Customer customer) {
@@ -181,7 +185,7 @@ public class DB {
             ps.setString(2, customer.getName());
             ps.setString(3, customer.getPhoneNumber());
             ps.setString(4, customer.getAddress());
-            ps.setString(5, customer.getDateOfBirth().toString());
+            ps.setDate(5, convertDate(customer.getDateOfBirth()));
             ps.setString(6, customer.getEmail());
 
             ps.executeUpdate();
@@ -380,32 +384,32 @@ public class DB {
     }
 
     public Room getRoom(int i) {
+        Room r = null;
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Room WHERE fld_RoomNo=?");
 
             ps.setString(1, Integer.toString(i));
 
             ResultSet rs = ps.executeQuery();
-
-            Room r = new Room(rs.getDouble(4), rs.getString(5), rs.getInt(1), rs.getInt(3), rs.getString(2));
-
+            if (rs.next()) {
+                r = new Room(rs.getDouble(4), rs.getString(5), rs.getInt(1), rs.getInt(3), rs.getString(2));
+            }
             ps.close();
-            return r;
         } catch (SQLException e) {
             sqlError(e);
         }
 
-        return null;
+        return r;
     }
 
     public void addRoom(Room room) {
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO tbl_Room VALUES (?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO tbl_Room VALUES (?,?,?,?,?)");
             ps.setInt(1, room.getNumber());
             ps.setString(2, room.getDescription());
             ps.setInt(3, room.getBedCount());
             ps.setDouble(4, room.getPrice());
-
+            ps.setString(5, room.getName());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
@@ -445,33 +449,34 @@ public class DB {
     }
 
     public RoomReservation getRoomReservation(int id) {
+        RoomReservation rr = null;
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_RoomReservation WHERE fld_RRID=?");
 
             ps.setString(1, Integer.toString(id));
 
             ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Customer c = getCustomer(rs.getInt(5));
+                Room r = getRoom(rs.getInt(4));
 
-            Customer c = getCustomer(rs.getInt(5));
-            Room r = getRoom(rs.getInt(4));
-
-            RoomReservation rr = new RoomReservation(rs.getDate(2), rs.getDate(3), c, r, rs.getInt(1));
-
+                rr = new RoomReservation(rs.getDate(2), rs.getDate(3), c, r, rs.getInt(1));
+            }
             ps.close();
             return rr;
         } catch (SQLException e) {
             sqlError(e);
         }
 
-        return null;
+        return rr;
     }
 
     public void addRoomReservation(RoomReservation roomReservation) {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO tbl_RoomReservation VALUES (?,?,?,?,?)");
             ps.setInt(1, roomReservation.getId());
-            ps.setString(2, roomReservation.getCheckIn().toString());
-            ps.setString(3, roomReservation.getCheckOut().toString());
+            ps.setDate(2, convertDate(roomReservation.getCheckIn()));
+            ps.setDate(3, convertDate(roomReservation.getCheckOut()));
             ps.setInt(4, roomReservation.getRoom().getNumber());
             ps.setInt(5, roomReservation.getCustomer().getId());
 
@@ -564,8 +569,8 @@ public class DB {
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_ToDo WHERE fld_TDDate=?");
 
-            java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.of(date.getYear() +1900, date.getMonth()+1, date.getDate()));
-            ps.setDate(1,sqlDate);
+            java.sql.Date sqlDate = convertDate(date);
+            ps.setDate(1, sqlDate);
 
             ResultSet rs = ps.executeQuery();
 
@@ -593,7 +598,7 @@ public class DB {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO tbl_ToDO VALUES (?,?,?)");
             ps.setString(1, toDo.getDescription());
-            ps.setString(2, toDo.getDate().toString());
+            ps.setDate(2, convertDate(toDo.getDate()));
             ps.setInt(3, toDo.getEmployee().getId());
 
             ps.executeUpdate();
@@ -618,7 +623,7 @@ public class DB {
     public void updateToDo(ToDo toDo) {
         try {
             PreparedStatement ps = con.prepareStatement("UPDATE tbl_ToDO SET fld_TDDate = ?, SET fld_EmpID = ? WHERE fld_TDDescription = ?");
-            ps.setString(1, toDo.getDate().toString());
+            ps.setDate(1, convertDate(toDo.getDate()));
             ps.setInt(2, toDo.getEmployee().getId());
             ps.setString(3, toDo.getDescription());
 

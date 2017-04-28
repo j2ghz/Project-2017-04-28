@@ -68,7 +68,7 @@ public class UpdateRoomRes {
         String custPhone = tfCustPhone.getText();
         Date custBirth = null;
         try {
-            custBirth = new SimpleDateFormat().parse(tfCustBirth.getText());
+            custBirth = new SimpleDateFormat("yyyy-MM-dd").parse(tfCustBirth.getText());
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered birthdate was invalid, customer was not updated.");
         }
@@ -80,6 +80,7 @@ public class UpdateRoomRes {
 
             adm.updateCustomer(customer);
             updateRoom(rm, customer);
+            JOptionPane.showConfirmDialog(pnHolding, "Success!");
         } else {
             JOptionPane.showConfirmDialog(pnHolding, "There was some information about the customer missing, reservation was not updated.");
         }
@@ -105,13 +106,13 @@ public class UpdateRoomRes {
     private void updateRoomReservation(ReservationManager rm, Room room, Customer customer) {
         Date checkIn = null;
         try {
-            checkIn = new SimpleDateFormat().parse(tfCheckin.getText());
+            checkIn = new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckin.getText());
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered check in was invalid, reservation was not updated.");
         }
         Date checkOut = null;
         try {
-            checkOut = new SimpleDateFormat().parse(tfCheckout.getText());
+            checkOut = new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckout.getText());
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered check out was invalid, reservation was not updated.");
         }

@@ -1,7 +1,6 @@
 package UI.Swing;
 
 import Domain.Management.Administration;
-import Domain.Management.UserManager;
 import Domain.Reservation.ReservationManager;
 
 import javax.swing.*;
@@ -18,15 +17,17 @@ public class MainMenu {
     private JButton btCreateToDo;
     private JButton btDeletRoomRes;
     private JButton btUpdRoomRes;
+    private JButton btSimpleRes;
 
     private MainMenu(ReservationManager rm, Administration adm) {
         btRoomReservation.addActionListener(Action -> StandardReservationUI.main(rm, adm));
-        btUpdRoomRes.addActionListener(Action -> UpdateRoomRes.main(rm,adm));
+        btUpdRoomRes.addActionListener(Action -> UpdateRoomRes.main(rm, adm));
         btDeletRoomRes.addActionListener(Action -> DeleteRoomRes.main(rm));
-        btArrangementReservation.addActionListener(Action ->  ArrangementReservationUI.main(rm, adm));
-        btCateringReservation.addActionListener(Action ->  CateringReservationUI.main(rm, adm));
-        btCreateToDo.addActionListener(Action ->  ToDoUI.main(adm));
-        btUserAdmin.addActionListener(Action ->  UserAdminUI.main(adm));
+        btArrangementReservation.addActionListener(Action -> ArrangementReservationUI.main(rm, adm));
+        btCateringReservation.addActionListener(Action -> CateringReservationUI.main(rm, adm));
+        btCreateToDo.addActionListener(Action -> ToDoUI.main(adm));
+        btUserAdmin.addActionListener(Action -> UserAdminUI.main(adm));
+        btSimpleRes.addActionListener(Action -> RoomReservationUI.main(rm, adm));
     }
 
     public static void main(ReservationManager rm, Administration adm) {

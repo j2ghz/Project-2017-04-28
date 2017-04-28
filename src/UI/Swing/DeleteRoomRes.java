@@ -28,5 +28,6 @@ public class DeleteRoomRes {
 
     private void deleteRoomRes(ReservationManager rm) {
         rm.deleteRoomReservation(Integer.parseInt(tfResId.getText()));
+        JOptionPane.showConfirmDialog(pnHolding, "Success!");
     }
 }

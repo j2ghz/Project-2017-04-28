@@ -141,6 +141,7 @@ public class UserAdminUI {
 
         if (empName != null && position != null && id != 0 && phone != null && address != null && email != null && bank != null) {
             adm.createEmployee(new Employee(empName, position, id, phone, address, email, bank));
+            JOptionPane.showConfirmDialog(pnHolding, "Success!");
         }
     }
 }

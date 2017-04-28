@@ -79,7 +79,8 @@ public class StandardReservationUI {
         jOptionPane.setVisible(false);
 
         try {
-            adm.createCustomer(Integer.parseInt(tfCustID.getText()), tfCustPhone.getText(), tfCustAddress.getText(), tfCustEmail.getText(), new SimpleDateFormat().parse(tfCustBirth.getText()), tfCustName.getText(), jOptionPane);
+            adm.createCustomer(Integer.parseInt(tfCustID.getText()), tfCustPhone.getText(), tfCustAddress.getText(), tfCustEmail.getText(), new SimpleDateFormat("yyyy-MM-dd").parse(tfCustBirth.getText()), tfCustName.getText(), jOptionPane);
+
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered birthdate was invalid, customer was not created.");
         }
@@ -93,22 +94,25 @@ public class StandardReservationUI {
 
         try {
             if (rbNoMenu.isSelected() && rbNoService.isSelected()) {
-                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room);
+                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckin.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckout.getText()), customer, room);
+                JOptionPane.showConfirmDialog(pnHolding, "Success!");
             } else if (rbNoService.isSelected() && rbYesMenu.isSelected()) {
                 Menu menu = new Menu(Double.parseDouble(tfMenuPrice.getText()), tfMenuName.getText());
                 adm.createMenu(menu);
-                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room, menu);
+                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckin.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckout.getText()), customer, room, menu);
+                JOptionPane.showConfirmDialog(pnHolding, "Success!");
             } else if (rbYesService.isSelected() && rbNoMenu.isSelected()) {
                 RoomService rs = new RoomService(Double.parseDouble(tfServicePrice.getText()), tfServiceName.getText());
                 adm.createRoomService(rs);
-                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room, rs);
+                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckin.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckout.getText()), customer, room, rs);
+                JOptionPane.showConfirmDialog(pnHolding, "Success!");
             } else if (rbYesService.isSelected() && rbYesMenu.isSelected()) {
                 Menu menu = new Menu(Double.parseDouble(tfMenuPrice.getText()), tfMenuName.getText());
                 adm.createMenu(menu);
                 RoomService rs = new RoomService(Double.parseDouble(tfServicePrice.getText()), tfServiceName.getText());
                 adm.createRoomService(rs);
-                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat().parse(tfCheckin.getText()), new SimpleDateFormat().parse(tfCheckout.getText()), customer, room, menu, rs);
-
+                rm.reserveRoom(Integer.parseInt(tfResId.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckin.getText()), new SimpleDateFormat("yyyy-MM-dd").parse(tfCheckout.getText()), customer, room, menu, rs);
+                JOptionPane.showConfirmDialog(pnHolding, "Success!");
             }
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "One of the entered dates was invalid, reservation was not created.");

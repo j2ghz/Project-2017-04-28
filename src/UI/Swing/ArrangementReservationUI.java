@@ -44,7 +44,8 @@ public class ArrangementReservationUI {
         jOptionPane.setVisible(false);
 
         try {
-            rm.createArrangementReservation(new SimpleDateFormat().parse(tfDate.getText()), Integer.parseInt(tfEventID.getText()), Double.parseDouble(tfPrice.getText()), Integer.parseInt(tfCustomer.getText()), tfEventName.getText(), tfDescription.getText(), adm.getCustomer(Integer.parseInt(tfCustomer.getText())), Integer.parseInt(tfEventSize.getText()), jOptionPane);
+            rm.createArrangementReservation(new SimpleDateFormat("yyyy-MM-dd").parse(tfDate.getText()), Integer.parseInt(tfEventID.getText()), Double.parseDouble(tfPrice.getText()), Integer.parseInt(tfCustomer.getText()), tfEventName.getText(), tfDescription.getText(), adm.getCustomer(Integer.parseInt(tfCustomer.getText())), Integer.parseInt(tfEventSize.getText()), jOptionPane);
+            JOptionPane.showConfirmDialog(pnHolding, "The arrangement was created.");
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered date was invalid, reservation was not created.");
         }

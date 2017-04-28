@@ -44,8 +44,8 @@ public class CateringReservationUI {
         jOptionPane.setVisible(false);
 
         try {
-            rm.createCateringReservation(Integer.parseInt(tfNoMeals.getText()), tfTypeOfFood.getText(), tfLocation.getText(), new SimpleDateFormat().parse(tfDate.getText()), Integer.parseInt(tfCateringID.getText()), Double.parseDouble(tfPrice.getText()), adm.getCustomer(Integer.parseInt(tfCustomer.getText())), jOptionPane);
-
+            rm.createCateringReservation(Integer.parseInt(tfNoMeals.getText()), tfTypeOfFood.getText(), tfLocation.getText(), new SimpleDateFormat("yyyy-MM-dd").parse(tfDate.getText()), Integer.parseInt(tfCateringID.getText()), Double.parseDouble(tfPrice.getText()), adm.getCustomer(Integer.parseInt(tfCustomer.getText())), jOptionPane);
+            JOptionPane.showConfirmDialog(pnHolding, "Reservation was created.");
         } catch (java.text.ParseException e) {
             JOptionPane.showConfirmDialog(pnHolding, "The entered date was invalid, reservation was not created.");
         }
