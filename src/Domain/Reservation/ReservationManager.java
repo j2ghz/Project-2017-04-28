@@ -20,30 +20,30 @@ public class ReservationManager {
         throw new NotImplementedException();
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room) {
-        RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room);
+    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, int id) {
+        RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         db.addRoomReservation(reservation);
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, Menu menu) {
-        RoomReservation reservation = new RoomReservation(checkIn, checkOut, null, room);
+    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, Menu menu, int id) {
+        RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         reservation.addMenu(menu);
 
         db.addRoomReservation(reservation);
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, RoomService rs) {
-        RoomReservation reservation = new RoomReservation(checkIn, checkOut, null, room);
+    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, RoomService rs, int id) {
+        RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         reservation.addRoomService(rs);
 
         db.addRoomReservation(reservation);
     }
 
-    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, Menu menu, RoomService rs) {
-        RoomReservation reservation = new RoomReservation(checkIn, checkOut, null, room);
+    public void reserveRoom(Date checkIn, Date checkOut, Customer customer, Room room, Menu menu, RoomService rs, int id) {
+        RoomReservation reservation = new RoomReservation(checkIn, checkOut, customer, room, id);
 
         reservation.addMenu(menu);
 

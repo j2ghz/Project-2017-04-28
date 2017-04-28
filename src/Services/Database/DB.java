@@ -367,7 +367,7 @@ public class DB {
         throw new NotImplementedException();
     }
 
-    public RoomReservation getRoomReservation(/*identifier*/int resId) {
+    public RoomReservation getRoomReservation(int id) {
         throw new NotImplementedException();
     }
 
