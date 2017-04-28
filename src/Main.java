@@ -23,8 +23,7 @@ public class Main {
         ReservationManager rm = new ReservationManager(db);
         Administration adm = new Administration(db);
 
-        LoginUI loginUI = new LoginUI(rm,um,adm);
-        loginUI.setVisible(true);
+        LoginUI.main(rm,um,adm);
 
 
         //if login bad exit
