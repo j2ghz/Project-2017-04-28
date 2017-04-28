@@ -15,7 +15,7 @@ public class UserManager {
     }
 
     public boolean login(String user, String pass) {
-        currentUser = db.getUser(user, pass);
+        currentUser = db.getUser(user);
         return currentUser != null;
     }
 
