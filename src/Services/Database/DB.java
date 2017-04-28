@@ -44,7 +44,7 @@ public class DB {
             ps.setString(4, arrangement.getDate().toString());
             ps.setDouble(5, arrangement.getPrice());
             ps.setInt(6, arrangement.getParticipantNo());
-            ps.setInt(7, arrangement.getCustomerId());
+            ps.setInt(7, arrangement.getCustomer().getId());
 
             ps.executeUpdate();
             ps.close();
@@ -75,7 +75,7 @@ public class DB {
             ps.setString(3, arrangement.getDate().toString());
             ps.setDouble(4, arrangement.getPrice());
             ps.setInt(5, arrangement.getParticipantNo());
-            ps.setInt(6, arrangement.getCustomerId());
+            ps.setInt(6, arrangement.getCustomer().getId());
             ps.setInt(7, arrangement.getId());
 
             ps.executeUpdate();
@@ -153,7 +153,22 @@ public class DB {
     }
 
     public Customer getCustomer(int id) {
-        throw new NotImplementedException();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Customer WHERE fld_CustID=?");
+
+            ps.setString(1, Integer.toString(id));
+
+            ResultSet rs = ps.executeQuery();
+
+            Customer c = new Customer(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(6), rs.getDate(5), rs.getString(2));
+
+            ps.close();
+            return c;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+
+        return null;
     }
 
     public void addCustomer(Customer customer) {
@@ -208,7 +223,7 @@ public class DB {
 
     public ArrayList<Employee> getEmployees() {
         try {
-            ps = con.prepareStatement("SELECT * FROM tbl_Employee");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Employee");
 
             ResultSet rs = ps.executeQuery();
 
@@ -230,7 +245,7 @@ public class DB {
 
     public Employee getEmployee(int i) {
         try {
-            ps = con.prepareStatement("SELECT * FROM tbl_Employee WHERE fld_EmpID=?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Employee WHERE fld_EmpID=?");
 
             ps.setString(1, Integer.toString(i));
 
@@ -343,12 +358,29 @@ public class DB {
     }
 
     public ArrayList<Room> getRooms() {
-        throw new NotImplementedException();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Room");
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<Room> roomList = new ArrayList<>();
+
+            while (rs.next()) {
+                Room r = new Room(rs.getDouble(4), rs.getString(5), rs.getInt(1), rs.getInt(3), rs.getString(2));
+                roomList.add(r);
+            }
+
+            ps.close();
+            return roomList;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+        return null;
     }
 
     public Room getRoom(int i) {
         try {
-            ps = con.prepareStatement("SELECT * FROM tbl_Room WHERE fld_RoomNo=?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_Room WHERE fld_RoomNo=?");
 
             ps.setString(1, Integer.toString(i));
 
@@ -413,7 +445,7 @@ public class DB {
 
     public RoomReservation getRoomReservation(int id) {
         try {
-            ps = con.prepareStatement("SELECT * FROM tbl_RoomReservation WHERE fld_RRID=?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_RoomReservation WHERE fld_RRID=?");
 
             ps.setString(1, Integer.toString(id));
 
@@ -528,7 +560,25 @@ public class DB {
     }
 
     public ArrayList<ToDo> getToDos(Date date) {
-        throw new NotImplementedException();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM tbl_ToDo");
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<ToDo> todoList = new ArrayList<>();
+
+            while (rs.next()) {
+                Employee e = getEmployee(rs.getInt(3));
+                ToDo t = new ToDo(rs.getString(1), rs.getDate(2), e);
+                todoList.add(t);
+            }
+
+            ps.close();
+            return todoList;
+        } catch (SQLException e) {
+            sqlError(e);
+        }
+        return null;
     }
 
     public ToDo getToDo(/*identifier*/) {
